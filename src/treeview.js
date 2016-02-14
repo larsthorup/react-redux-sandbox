@@ -1,8 +1,10 @@
 /* eslint-env react */
-/* global React */
+/* global React jsnox */
+
+var d = jsnox(React);
 
 function NodeView (props) {
-  return React.createElement('span', null, props.text); // ToDo: use jnosx
+  return d('span', null, props.text);
 }
 
 NodeView.propTypes = {
@@ -11,12 +13,12 @@ NodeView.propTypes = {
 
 function NodeListView (props) {
   var listItems = props.nodes ? props.nodes.map(function (node) {
-    var nodeView = React.createElement(NodeView, Object.assign({}, node, {key: 'node'}));
-    var childView = node.nodes ? React.createElement(NodeListView, Object.assign({}, node, {key: 'nodelist'})) : null;
+    var nodeView = d(NodeView, Object.assign({}, node, {key: 'node'}));
+    var childView = node.nodes ? d(NodeListView, Object.assign({}, node, {key: 'nodelist'})) : null;
     var nodeAndChildren = childView ? [nodeView, childView] : [nodeView];
-    return React.createElement('li', {key: node.id}, nodeAndChildren);
+    return d('li', {key: node.id}, nodeAndChildren);
   }) : [];
-  return React.createElement('ul', null, listItems);
+  return d('ul', null, listItems);
 }
 
 NodeListView.propTypes = {
@@ -25,7 +27,7 @@ NodeListView.propTypes = {
 
 window.TreeView = function (props) {
   var nodeListView = React.createElement(NodeListView, props);
-  return React.createElement('div', null, nodeListView);
+  return d('div', null, nodeListView);
 };
 
 NodeListView.propTypes = {

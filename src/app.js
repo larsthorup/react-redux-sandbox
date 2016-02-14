@@ -1,10 +1,12 @@
 /* eslint-env react */
-/* global React ReactDOM */
+/* global React ReactDOM jsnox */
 /* global TreeView */
 
-var app = document.getElementById('app');
+var d = jsnox(React);
 
-var vdom = React.createElement(TreeView, {
+var appElement = document.getElementById('app');
+
+var appView = d(TreeView, {
   nodes: [
     {id: 'vegetable', text: 'Vegetable', nodes: [
       {id: 'fruit', text: 'Fruit', nodes: [
@@ -19,4 +21,4 @@ var vdom = React.createElement(TreeView, {
   ]
 });
 
-ReactDOM.render(vdom, app);
+ReactDOM.render(appView, appElement);

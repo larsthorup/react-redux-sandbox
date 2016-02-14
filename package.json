@@ -15,5 +15,10 @@
   "homepage": "https://github.com/larsthorup/react-redux-sandbox#readme",
   "devDependencies": {
     "semistandard": "^7.0.5"
+  },
+  "dependencies": {
+    "jsnox": "^2.1.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   }
 }
