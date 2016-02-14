@@ -11,19 +11,18 @@
   }
 }([
   'react',
-  'jsnox',
-  './treeNodeListView'
-], function (React, jsnox, TreeNodeListView) {
+  'jsnox'
+], function (React, jsnox) {
   var d = jsnox(React);
 
-  function TreeView (props) {
-    var nodeListView = React.createElement(TreeNodeListView, props);
-    return d('div', null, nodeListView);
+  function TreeNodeView (props) {
+    return d('span', null, props.text);
   }
 
-  TreeView.propTypes = {
-    nodes: React.PropTypes.array.isRequired
+  TreeNodeView.propTypes = {
+    id: React.PropTypes.string.isRequired,
+    text: React.PropTypes.string.isRequired
   };
 
-  return TreeView;
+  return TreeNodeView;
 }));

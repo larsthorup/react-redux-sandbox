@@ -1,6 +1,5 @@
 /* eslint-env amd, mocha */
 
-// ToDo: also run test in browser
 (function (depNames, factory) {
   if (typeof define === 'function' && define.amd) {
     define(depNames, factory);
@@ -15,21 +14,20 @@
   'react',
   'jsnox',
   'react-addons-test-utils',
-  './treeView',
-  './treeNodeListView'
-], function (React, jsnox, ReactTestUtils, TreeView, TreeNodeListView) {
+  './treeNodeView'
+], function (React, jsnox, ReactTestUtils, TreeNodeView) {
   var d = jsnox(React);
 
-  describe('TreeView', function () {
-    it('should create a div with a tree node list', function () {
-      var model = {nodes: []};
-      var view = d(TreeView, model);
+  describe('TreeNodeView', function () {
+    it('should create a span with the node text', function () {
+      var model = {id: 'node', text: 'aNodeText'};
+      var view = d(TreeNodeView, model);
+      // ToDo: refactor
       var renderer = ReactTestUtils.createRenderer();
       renderer.render(view);
       var sdom = renderer.getRenderOutput();
-      sdom.type.should.equal('div');
-      sdom.props.children.type.should.equal(TreeNodeListView);
-      sdom.props.children.props.nodes.should.equal(model.nodes);
+      sdom.type.should.equal('span');
+      sdom.props.children.should.equal('aNodeText');
     });
   });
 }));

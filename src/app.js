@@ -13,7 +13,7 @@
   'react',
   'react-dom',
   'jsnox',
-  './treeview'
+  './treeView'
 ], function (React, ReactDOM, jsnox, TreeView) {
   var d = jsnox(React);
 
