@@ -1,4 +1,4 @@
-/* eslint-env browser, amd, react  */
+/* eslint-env browser, amd */
 (function (depNames, factory) {
   if (typeof define === 'function' && define.amd) {
     define(depNames, factory);
