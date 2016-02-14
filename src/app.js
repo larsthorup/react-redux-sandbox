@@ -1,24 +1,41 @@
-/* eslint-env react */
-/* global React ReactDOM jsnox */
-/* global TreeView */
+/* eslint-env browser, amd, react */
+(function (depNames, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(depNames, factory);
+  } else if (typeof exports === 'object') {
+    var deps = [];
+    for (var i = 0; i < depNames.length; ++i) {
+      deps.push(require(depNames[i]));
+    }
+    module.exports = factory.apply(this, deps);
+  }
+}([
+  'react',
+  'react-dom',
+  'jsnox',
+  'treeview'
+], function (React, ReactDOM, jsnox, TreeView) {
+  var d = jsnox(React);
 
-var d = jsnox(React);
+  function app () {
+    var appView = d(TreeView, {
+      nodes: [
+        {id: 'vegetable', text: 'Vegetable', nodes: [
+          {id: 'fruit', text: 'Fruit', nodes: [
+            {id: 'apple', text: 'Apple'},
+            {id: 'orange', text: 'Orange'}
+          ]}]
+        },
+        {id: 'meat', text: 'Meat', nodes: [
+          {id: 'beef', text: 'Beef'},
+          {id: 'lamb', text: 'Lamb'}
+        ]}
+      ]
+    });
 
-var appElement = document.getElementById('app');
+    var appElement = document.getElementById('app');
+    ReactDOM.render(appView, appElement);
+  }
 
-var appView = d(TreeView, {
-  nodes: [
-    {id: 'vegetable', text: 'Vegetable', nodes: [
-      {id: 'fruit', text: 'Fruit', nodes: [
-        {id: 'apple', text: 'Apple'},
-        {id: 'orange', text: 'Orange'}
-      ]}]
-    },
-    {id: 'meat', text: 'Meat', nodes: [
-      {id: 'beef', text: 'Beef'},
-      {id: 'lamb', text: 'Lamb'}
-    ]}
-  ]
-});
-
-ReactDOM.render(appView, appElement);
+  return app;
+}));
