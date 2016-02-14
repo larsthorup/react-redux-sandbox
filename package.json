@@ -1,10 +1,11 @@
 {
   "name": "react-redux-sandbox",
   "version": "0.1.0",
-  "description": "",
+  "description": "sandbox for react and redux",
   "scripts": {
-    "lint": "semistandard",
-    "test": "npm run lint"
+    "lint": "semistandard --verbose",
+    "mocha": "istanbul --config=test/istanbul.conf.js cover node_modules/mocha/bin/_mocha",
+    "test": "npm run lint && npm run mocha"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,9 @@
   "license": "MIT",
   "homepage": "https://github.com/larsthorup/react-redux-sandbox#readme",
   "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
     "semistandard": "^7.0.5"
   },
   "dependencies": {

@@ -1,0 +1,4 @@
+--reporter dot
+--require test/mocha_setup
+--require src/treeview
+--recursive src/**/*.test.js

@@ -12,6 +12,7 @@ NodeView.propTypes = {
 };
 
 function NodeListView (props) {
+  // ToDo: extract component for list item
   var listItems = props.nodes ? props.nodes.map(function (node) {
     var nodeView = d(NodeView, Object.assign({}, node, {key: 'node'}));
     var childView = node.nodes ? d(NodeListView, Object.assign({}, node, {key: 'nodelist'})) : null;
@@ -25,7 +26,7 @@ NodeListView.propTypes = {
   nodes: React.PropTypes.array.isRequired
 };
 
-window.TreeView = function (props) {
+this.TreeView = function (props) {
   var nodeListView = React.createElement(NodeListView, props);
   return d('div', null, nodeListView);
 };
