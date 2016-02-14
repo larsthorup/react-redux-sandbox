@@ -1,6 +1,6 @@
 /* eslint-env amd, mocha */
 
-// ToDo: run test in browser as well as on node as well as with Wallaby
+// ToDo: also run test in browser
 (function (depNames, factory) {
   if (typeof define === 'function' && define.amd) {
     define(depNames, factory);
@@ -26,6 +26,8 @@
       renderer.render(view);
       var sdom = renderer.getRenderOutput();
       sdom.type.should.equal('div');
+      // sdom.props.children.type.should.equal(NodeListView);
+      sdom.props.children.props.nodes.should.deep.equal([]);
     });
   });
 }));
