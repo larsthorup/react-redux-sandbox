@@ -12,10 +12,11 @@
   }
 }([
   'react',
+  'react-dom/server',
   'jsnox',
   'react-addons-test-utils',
   './treeNodeView'
-], function (React, jsnox, ReactTestUtils, TreeNodeView) {
+], function (React, ReactDomServer, jsnox, ReactTestUtils, TreeNodeView) {
   var d = jsnox(React);
 
   describe('TreeNodeView', function () {
@@ -28,6 +29,12 @@
       var sdom = renderer.getRenderOutput();
       sdom.type.should.equal('span');
       sdom.props.children.should.equal('aNodeText');
+    });
+
+    it('should render complete markup', function () {
+      var model = {id: 'node', text: 'aNodeText'};
+      var view = d(TreeNodeView, model);
+      ReactDomServer.renderToStaticMarkup(view).should.equal('<span>aNodeText</span>');
     });
   });
 }));

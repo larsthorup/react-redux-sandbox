@@ -12,16 +12,17 @@
   }
 }([
   'react',
+  'react-dom/server',
   'jsnox',
   'react-addons-test-utils',
   './treeNodeListView',
   './treeNodeView'
-], function (React, jsnox, ReactTestUtils, TreeNodeListView, TreeNodeView) {
+], function (React, ReactDomServer, jsnox, ReactTestUtils, TreeNodeListView, TreeNodeView) {
   var d = jsnox(React);
 
   describe('TreeNodeListView', function () {
     it('should create an empty <ul> when no nodes', function () {
-      var model = {};
+      var model = {nodes: []};
       var view = d(TreeNodeListView, model);
       // ToDo: refactor
       var renderer = ReactTestUtils.createRenderer();
@@ -60,6 +61,12 @@
       sdom.props.children[0].props.children[0].type.should.equal(TreeNodeView);
       sdom.props.children[0].props.children[0].props.text.should.equal('node1text');
       sdom.props.children[0].props.children[0].props.nodes.should.deep.equal([{id: 'sub', text: 'subNodeText'}]);
+    });
+
+    it('should render complete markup', function () {
+      var model = {nodes: [{id: 'top', text: 'node1text', nodes: [{id: 'sub', text: 'subNodeText'}]}]};
+      var view = d(TreeNodeListView, model);
+      ReactDomServer.renderToStaticMarkup(view).should.equal('<ul><li><span>node1text</span><ul><li><span>subNodeText</span></li></ul></li></ul>');
     });
   });
 }));
