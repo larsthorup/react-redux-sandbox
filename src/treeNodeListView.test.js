@@ -12,61 +12,33 @@
   }
 }([
   'react',
-  'react-dom/server',
   'jsnox',
-  'react-addons-test-utils',
-  './treeNodeListView',
-  './treeNodeView'
-], function (React, ReactDomServer, jsnox, ReactTestUtils, TreeNodeListView, TreeNodeView) {
+  'skin-deep',
+  './treeNodeListView'
+], function (React, jsnox, sd, TreeNodeListView) {
   var d = jsnox(React);
 
   describe('TreeNodeListView', function () {
     it('should create an empty <ul> when no nodes', function () {
       var model = {nodes: []};
       var view = d(TreeNodeListView, model);
-      // ToDo: refactor
-      var renderer = ReactTestUtils.createRenderer();
-      renderer.render(view);
-      var sdom = renderer.getRenderOutput();
-      sdom.type.should.equal('ul');
-      sdom.props.children.should.deep.equal([]);
+      var ul = sd.shallowRender(view).subTree('ul');
+      ul.props.children.should.deep.equal([]);
     });
 
     it('should create an empty <ul> with an <li> with a node view for each node without children', function () {
       var model = {nodes: [{id: '1', text: 'node1text'}, {id: '2', text: 'node2text'}]};
       var view = d(TreeNodeListView, model);
-      // ToDo: refactor
-      var renderer = ReactTestUtils.createRenderer();
-      renderer.render(view);
-      var sdom = renderer.getRenderOutput();
-      // ToDo: use rquery?
-      sdom.type.should.equal('ul');
-      sdom.props.children[0].type.should.equal('li');
-      sdom.props.children[0].props.children[0].type.should.equal(TreeNodeView);
-      sdom.props.children[0].props.children[0].props.text.should.equal('node1text');
-      sdom.props.children[1].props.children[0].type.should.equal(TreeNodeView);
-      sdom.props.children[1].props.children[0].props.text.should.equal('node2text');
+      var li = sd.shallowRender(view).subTree('ul').everySubTree('li');
+      li[0].subTree('TreeNodeView').props.text.should.equal('node1text');
+      li[1].subTree('TreeNodeView').props.text.should.equal('node2text');
     });
 
     it('should include a tree node list view in the <li> with the children of this node', function () {
       var model = {nodes: [{id: 'top', text: 'node1text', nodes: [{id: 'sub', text: 'subNodeText'}]}]};
       var view = d(TreeNodeListView, model);
-      // ToDo: refactor
-      var renderer = ReactTestUtils.createRenderer();
-      renderer.render(view);
-      var sdom = renderer.getRenderOutput();
-      // ToDo: use rquery?
-      sdom.type.should.equal('ul');
-      sdom.props.children[0].type.should.equal('li');
-      sdom.props.children[0].props.children[0].type.should.equal(TreeNodeView);
-      sdom.props.children[0].props.children[0].props.text.should.equal('node1text');
-      sdom.props.children[0].props.children[0].props.nodes.should.deep.equal([{id: 'sub', text: 'subNodeText'}]);
-    });
-
-    it('should render complete markup', function () {
-      var model = {nodes: [{id: 'top', text: 'node1text', nodes: [{id: 'sub', text: 'subNodeText'}]}]};
-      var view = d(TreeNodeListView, model);
-      ReactDomServer.renderToStaticMarkup(view).should.equal('<ul><li><span>node1text</span><ul><li><span>subNodeText</span></li></ul></li></ul>');
+      var treeNodeListView = sd.shallowRender(view).subTree('ul').subTree('li').subTree('TreeNodeListView');
+      treeNodeListView.props.nodes.should.deep.equal([{id: 'sub', text: 'subNodeText'}]);
     });
   });
 }));

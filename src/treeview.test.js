@@ -14,22 +14,17 @@
 }([
   'react',
   'jsnox',
-  'react-addons-test-utils',
-  './treeView',
-  './treeNodeListView'
-], function (React, jsnox, ReactTestUtils, TreeView, TreeNodeListView) {
+  'skin-deep',
+  './treeView'
+], function (React, jsnox, sd, TreeView) {
   var d = jsnox(React);
 
   describe('TreeView', function () {
     it('should create a div with a tree node list', function () {
       var model = {nodes: []};
       var view = d(TreeView, model);
-      var renderer = ReactTestUtils.createRenderer();
-      renderer.render(view);
-      var sdom = renderer.getRenderOutput();
-      sdom.type.should.equal('div');
-      sdom.props.children.type.should.equal(TreeNodeListView);
-      sdom.props.children.props.nodes.should.equal(model.nodes);
+      var div = sd.shallowRender(view).subTree('div').subTree('TreeNodeListView');
+      div.props.nodes.should.equal(model.nodes);
     });
   });
 }));

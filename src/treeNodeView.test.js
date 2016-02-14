@@ -12,29 +12,18 @@
   }
 }([
   'react',
-  'react-dom/server',
   'jsnox',
-  'react-addons-test-utils',
+  'skin-deep',
   './treeNodeView'
-], function (React, ReactDomServer, jsnox, ReactTestUtils, TreeNodeView) {
+], function (React, jsnox, sd, TreeNodeView) {
   var d = jsnox(React);
 
   describe('TreeNodeView', function () {
     it('should create a span with the node text', function () {
       var model = {id: 'node', text: 'aNodeText'};
       var view = d(TreeNodeView, model);
-      // ToDo: refactor
-      var renderer = ReactTestUtils.createRenderer();
-      renderer.render(view);
-      var sdom = renderer.getRenderOutput();
-      sdom.type.should.equal('span');
-      sdom.props.children.should.equal('aNodeText');
-    });
-
-    it('should render complete markup', function () {
-      var model = {id: 'node', text: 'aNodeText'};
-      var view = d(TreeNodeView, model);
-      ReactDomServer.renderToStaticMarkup(view).should.equal('<span>aNodeText</span>');
+      var span = sd.shallowRender(view).subTree('span');
+      span.text().should.equal('aNodeText');
     });
   });
 }));

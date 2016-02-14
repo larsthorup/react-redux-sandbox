@@ -19,7 +19,8 @@
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
-    "semistandard": "^7.0.5"
+    "semistandard": "^7.0.5",
+    "skin-deep": "^0.14.0"
   },
   "dependencies": {
     "jsnox": "^2.1.2",
