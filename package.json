@@ -1,0 +1,19 @@
+{
+  "name": "react-redux-sandbox",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "lint": "semistandard",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larsthorup/react-redux-sandbox.git"
+  },
+  "author": "Lars Thorup <lars@zealake.com> (http://github.com/larsthorup)",
+  "license": "MIT",
+  "homepage": "https://github.com/larsthorup/react-redux-sandbox#readme",
+  "devDependencies": {
+    "semistandard": "^7.0.5"
+  }
+}
