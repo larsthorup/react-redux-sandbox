@@ -19,7 +19,7 @@
   function TreeNodeList (props) {
     // ToDo: extract component for list item
     var listItems = props.nodes ? props.nodes.map(function (node) {
-      var nodeView = d(TreeNode, Object.assign({}, node, {key: 'node'}));
+      var nodeView = d(TreeNode, Object.assign({}, node, {key: 'node', setCurrentNode: props.setCurrentNode})); // ToDo: how to add relevant actions?
       var childView = node.nodes ? d(TreeNodeList, Object.assign({}, node, {key: 'nodelist'})) : null;
       var nodeAndChildren = childView ? [nodeView, childView] : [nodeView];
       return d('li', {key: node.id}, nodeAndChildren);

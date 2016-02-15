@@ -12,28 +12,22 @@
     module.exports = factory.apply(this, deps);
   }
 }([
+  './appActions',
   './appReducer'
-], function (appReducer) {
+], function (Action, appReducer) {
   describe('appReducer', function () {
     describe('setState', function () {
       it('should replace the state', function () {
-        var action = {
-          type: 'SET_STATE',
-          state: {
-            some: 'state'
-          }
-        };
-        var previousState;
+        var action = Action.setState({some: 'state'});
+        var previousState; // Note: undefined
         var state = appReducer(previousState, action);
         state.should.deep.equal({some: 'state'});
       });
     });
+
     describe('tree.setCurrentNode', function () { // ToDo: modular reducers
       it('should move current flag to specified node', function () {
-        var action = {
-          type: 'TREE.SET_CURRENT_NODE',
-          id: 'orange'
-        };
+        var action = Action.setCurrentNode('orange');
         var previousState = {
           nodes: [
             {current: true, id: 'apple'},

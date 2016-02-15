@@ -17,8 +17,16 @@
     };
   }
 
+  function setCurrentNode (id) {
+    return {
+      type: 'TREE.SET_CURRENT_NODE',
+      id: id
+    };
+  }
+
   var appActions = {
-    setState: setState
+    setState: setState,
+    setCurrentNode: setCurrentNode
   };
 
   return appActions;

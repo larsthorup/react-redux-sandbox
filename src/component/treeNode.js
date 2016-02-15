@@ -16,7 +16,14 @@
   var d = jsnox(React);
 
   function TreeNode (props) {
-    var spanProps = props.current ? {className: 'current'} : null;
+    var spanProps = {
+      onClick: function () {
+        props.setCurrentNode(props.id);
+      }
+    };
+    if (props.current) {
+      spanProps.className = 'current';
+    }
     return d('span', spanProps, props.text);
   }
 

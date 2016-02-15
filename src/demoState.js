@@ -12,8 +12,8 @@
 }([], function () {
   var demoState = {
     nodes: [
-      {id: 'vegetable', text: 'Vegetable', nodes: [
-        {current: true, id: 'fruit', text: 'Fruit', nodes: [
+      {current: true, id: 'vegetable', text: 'Vegetable', nodes: [
+        {id: 'fruit', text: 'Fruit', nodes: [
           {id: 'apple', text: 'Apple'},
           {id: 'orange', text: 'Orange'}
         ]}]

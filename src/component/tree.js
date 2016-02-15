@@ -13,8 +13,9 @@
   'react',
   'jsnox',
   'react-redux',
+  '../appActions',
   './treeNodeList'
-], function (React, jsnox, ReactRedux, TreeNodeList) {
+], function (React, jsnox, ReactRedux, Action, TreeNodeList) {
   var d = jsnox(React);
   var connect = ReactRedux.connect;
 
@@ -27,10 +28,12 @@
     nodes: React.PropTypes.array.isRequired
   };
 
-  var Container = connect(function (state) {
+  function mapStateToProps (state) {
     // ToDo: extract sub state needed by this component
     return state;
-  })(Tree);
+  }
+
+  var Container = connect(mapStateToProps, Action)(Tree);
 
   return {
     View: Tree,
