@@ -23,7 +23,7 @@
     it('should create a div with a tree node list', function () {
       var model = {nodes: []};
       var view = d(Tree.View, model);
-      var div = sd.shallowRender(view).subTree('div').subTree('TreeNodeListView');
+      var div = sd.shallowRender(view).subTree('div').subTree('TreeNodeList');
       div.props.nodes.should.equal(model.nodes);
     });
   });

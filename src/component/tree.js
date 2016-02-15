@@ -13,28 +13,27 @@
   'react',
   'jsnox',
   'react-redux',
-  './treeNodeListView'
-], function (React, jsnox, ReactRedux, TreeNodeListView) {
+  './treeNodeList'
+], function (React, jsnox, ReactRedux, TreeNodeList) {
   var d = jsnox(React);
   var connect = ReactRedux.connect;
 
-  function TreeView (props) {
-    var nodeListView = React.createElement(TreeNodeListView, props);
+  function Tree (props) {
+    var nodeListView = React.createElement(TreeNodeList, props);
     return d('div', null, nodeListView);
   }
 
-  TreeView.propTypes = {
-    // ToDo: avoid Warning: Failed propType: Required prop `nodes` was not specified in `TreeView`. Check the render method of `RouterContext`.
-    // nodes: React.PropTypes.array.isRequired
+  Tree.propTypes = {
+    nodes: React.PropTypes.array.isRequired
   };
 
-  var TreeContainer = connect(function (state) {
+  var Container = connect(function (state) {
     // ToDo: extract sub state needed by this component
     return state;
-  })(TreeView);
+  })(Tree);
 
   return {
-    View: TreeView,
-    Container: TreeContainer
+    View: Tree,
+    Container: Container
   };
 }));

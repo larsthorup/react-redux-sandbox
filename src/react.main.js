@@ -17,8 +17,9 @@
   'redux',
   'react-redux',
   './appReducer',
-  './appRoutes'
-], function (React, ReactDOM, ReactRouter, jsnox, Redux, ReactRedux, appReducer, appRoutes) {
+  './appRoutes',
+  './demoState'
+], function (React, ReactDOM, ReactRouter, jsnox, Redux, ReactRedux, appReducer, appRoutes, demoState) {
   var d = jsnox(React);
   var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;
@@ -33,20 +34,7 @@
     var store = createStore(appReducer);
     store.dispatch({
       type: 'SET_STATE',
-      state: {
-        nodes: [
-          {id: 'vegetable', text: 'Vegetable', nodes: [
-            {id: 'fruit', text: 'Fruit', nodes: [
-              {id: 'apple', text: 'Apple'},
-              {id: 'orange', text: 'Orange'}
-            ]}]
-          },
-          {id: 'meat', text: 'Meat', nodes: [
-            {id: 'beef', text: 'Beef'},
-            {id: 'lamb', text: 'Lamb'}
-          ]}
-        ]
-      }
+      state: demoState
     });
 
     var appRouter = d(Router, d(Route, {component: App}, appRoutes));

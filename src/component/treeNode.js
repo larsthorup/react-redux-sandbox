@@ -15,14 +15,14 @@
 ], function (React, jsnox) {
   var d = jsnox(React);
 
-  function TreeNodeView (props) {
+  function TreeNode (props) {
     return d('span', null, props.text);
   }
 
-  TreeNodeView.propTypes = {
+  TreeNode.propTypes = {
     id: React.PropTypes.string.isRequired,
     text: React.PropTypes.string.isRequired
   };
 
-  return TreeNodeView;
+  return TreeNode;
 }));

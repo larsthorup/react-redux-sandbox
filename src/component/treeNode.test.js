@@ -14,14 +14,14 @@
   'react',
   'jsnox',
   'skin-deep',
-  './treeNodeView'
-], function (React, jsnox, sd, TreeNodeView) {
+  './treeNode'
+], function (React, jsnox, sd, TreeNode) {
   var d = jsnox(React);
 
-  describe('TreeNodeView', function () {
+  describe('TreeNode', function () {
     it('should create a span with the node text', function () {
       var model = {id: 'node', text: 'aNodeText'};
-      var view = d(TreeNodeView, model);
+      var view = d(TreeNode, model);
       var span = sd.shallowRender(view).subTree('span');
       span.text().should.equal('aNodeText');
     });

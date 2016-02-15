@@ -12,24 +12,24 @@
 }([
   'react',
   'jsnox',
-  './treeNodeView'
-], function (React, jsnox, TreeNodeView) {
+  './treeNode'
+], function (React, jsnox, TreeNode) {
   var d = jsnox(React);
 
-  function TreeNodeListView (props) {
+  function TreeNodeList (props) {
     // ToDo: extract component for list item
     var listItems = props.nodes ? props.nodes.map(function (node) {
-      var nodeView = d(TreeNodeView, Object.assign({}, node, {key: 'node'}));
-      var childView = node.nodes ? d(TreeNodeListView, Object.assign({}, node, {key: 'nodelist'})) : null;
+      var nodeView = d(TreeNode, Object.assign({}, node, {key: 'node'}));
+      var childView = node.nodes ? d(TreeNodeList, Object.assign({}, node, {key: 'nodelist'})) : null;
       var nodeAndChildren = childView ? [nodeView, childView] : [nodeView];
       return d('li', {key: node.id}, nodeAndChildren);
     }) : [];
     return d('ul', null, listItems);
   }
 
-  TreeNodeListView.propTypes = {
+  TreeNodeList.propTypes = {
     nodes: React.PropTypes.array.isRequired
   };
 
-  return TreeNodeListView;
+  return TreeNodeList;
 }));
