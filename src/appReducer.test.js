@@ -11,8 +11,19 @@
     }
     module.exports = factory.apply(this, deps);
   }
-}([], function () {
+}([
+  './appReducer'
+], function (appReducer) {
   describe('appReducer', function () {
-    it('should work');
+    it('should handle setState', function () {
+      var action = {
+        type: 'SET_STATE',
+        state: {
+          some: 'state'
+        }
+      };
+      var state = appReducer(undefined, action);
+      state.should.deep.equal({some: 'state'});
+    });
   });
 }));
