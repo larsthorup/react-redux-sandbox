@@ -11,21 +11,17 @@
   }
 }([
   'react',
-  'react-dom',
   'react-router',
   'jsnox',
-  './appRoutes',
-  './component/appView'
-], function (React, ReactDOM, ReactRouter, jsnox, appRoutes, AppView) {
+  './component/treeView'
+], function (React, ReactRouter, jsnox, TreeView) {
   var d = jsnox(React);
-  var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;
 
-  function main () {
-    var appRouter = d(Router, d(Route, {component: AppView}, appRoutes));
-    var appElement = document.getElementById('app');
-    ReactDOM.render(appRouter, appElement);
-  }
+  var appRoutes = [
+    // ToDo: avoid warning from react when leaving out key here
+    d(Route, {key: '/', path: '/', component: TreeView})
+  ];
 
-  return main;
+  return appRoutes;
 }));
