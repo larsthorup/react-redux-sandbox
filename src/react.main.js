@@ -28,6 +28,23 @@
 
   function main () {
     var store = createStore(appReducer);
+    store.dispatch({
+      type: 'SET_STATE',
+      state: {
+        nodes: [
+          {id: 'vegetable', text: 'Vegetable', nodes: [
+            {id: 'fruit', text: 'Fruit', nodes: [
+              {id: 'apple', text: 'Apple'},
+              {id: 'orange', text: 'Orange'}
+            ]}]
+          },
+          {id: 'meat', text: 'Meat', nodes: [
+            {id: 'beef', text: 'Beef'},
+            {id: 'lamb', text: 'Lamb'}
+          ]}
+        ]
+      }
+    });
     var appRouter = d(Router, d(Route, {component: AppView}, appRoutes));
     var appProvider = d(Provider, {store: store}, appRouter);
     var appElement = document.getElementById('app');

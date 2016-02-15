@@ -12,21 +12,9 @@
 }([
   'react'
 ], function (React) {
+  // ToDo: inline?
   function AppView (props) {
-    return React.cloneElement(props.children, {
-      nodes: [
-        {id: 'vegetable', text: 'Vegetable', nodes: [
-          {id: 'fruit', text: 'Fruit', nodes: [
-            {id: 'apple', text: 'Apple'},
-            {id: 'orange', text: 'Orange'}
-          ]}]
-        },
-        {id: 'meat', text: 'Meat', nodes: [
-          {id: 'beef', text: 'Beef'},
-          {id: 'lamb', text: 'Lamb'}
-        ]}
-      ]
-    });
+    return props.children;
   }
 
   return AppView;

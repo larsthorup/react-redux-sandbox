@@ -12,9 +12,11 @@
 }([
   'react',
   'jsnox',
+  'react-redux',
   './treeNodeListView'
-], function (React, jsnox, TreeNodeListView) {
+], function (React, jsnox, ReactRedux, TreeNodeListView) {
   var d = jsnox(React);
+  var connect = ReactRedux.connect;
 
   function TreeView (props) {
     var nodeListView = React.createElement(TreeNodeListView, props);
@@ -26,5 +28,13 @@
     // nodes: React.PropTypes.array.isRequired
   };
 
-  return TreeView;
+  var TreeContainer = connect(function (state) {
+    // ToDo: extract sub state needed by this component
+    return state;
+  })(TreeView);
+
+  return {
+    View: TreeView,
+    Container: TreeContainer
+  };
 }));
