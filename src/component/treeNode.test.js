@@ -1,4 +1,5 @@
 /* eslint-env amd, mocha */
+/* global should */
 
 (function (depNames, factory) {
   if (typeof define === 'function' && define.amd) {

@@ -16,10 +16,11 @@
   'jsnox',
   'redux',
   'react-redux',
+  './appActions',
   './appReducer',
   './appRoutes',
   './demoState'
-], function (React, ReactDOM, ReactRouter, jsnox, Redux, ReactRedux, appReducer, appRoutes, demoState) {
+], function (React, ReactDOM, ReactRouter, jsnox, Redux, ReactRedux, Action, appReducer, appRoutes, demoState) {
   var d = jsnox(React);
   var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;
@@ -32,10 +33,7 @@
 
   function main () {
     var store = createStore(appReducer);
-    store.dispatch({
-      type: 'SET_STATE',
-      state: demoState
-    });
+    store.dispatch(Action.setState(demoState));
 
     var appRouter = d(Router, d(Route, {component: App}, appRoutes));
     var appProvider = d(Provider, {store: store}, appRouter);
