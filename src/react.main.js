@@ -14,17 +14,24 @@
   'react-dom',
   'react-router',
   'jsnox',
+  'redux',
+  'react-redux',
+  './appReducer',
   './appRoutes',
-  './component/appView'
-], function (React, ReactDOM, ReactRouter, jsnox, appRoutes, AppView) {
+  './appView'
+], function (React, ReactDOM, ReactRouter, jsnox, Redux, ReactRedux, appReducer, appRoutes, AppView) {
   var d = jsnox(React);
   var Router = ReactRouter.Router;
   var Route = ReactRouter.Route;
+  var createStore = Redux.createStore;
+  var Provider = ReactRedux.Provider;
 
   function main () {
+    var store = createStore(appReducer);
     var appRouter = d(Router, d(Route, {component: AppView}, appRoutes));
+    var appProvider = d(Provider, {store: store}, appRouter);
     var appElement = document.getElementById('app');
-    ReactDOM.render(appRouter, appElement);
+    ReactDOM.render(appProvider, appElement);
   }
 
   return main;
