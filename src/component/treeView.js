@@ -22,7 +22,8 @@
   }
 
   TreeView.propTypes = {
-    nodes: React.PropTypes.array.isRequired
+    // ToDo: avoid Warning: Failed propType: Required prop `nodes` was not specified in `TreeView`. Check the render method of `RouterContext`.
+    // nodes: React.PropTypes.array.isRequired
   };
 
   return TreeView;

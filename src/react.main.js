@@ -12,29 +12,23 @@
 }([
   'react',
   'react-dom',
+  'react-router',
   'jsnox',
+  './component/appView',
   './component/treeView'
-], function (React, ReactDOM, jsnox, TreeView) {
+], function (React, ReactDOM, ReactRouter, jsnox, AppView, TreeView) {
   var d = jsnox(React);
+  var Router = ReactRouter.Router;
+  var Route = ReactRouter.Route;
 
   function main () {
-    var appView = d(TreeView, {
-      nodes: [
-        {id: 'vegetable', text: 'Vegetable', nodes: [
-          {id: 'fruit', text: 'Fruit', nodes: [
-            {id: 'apple', text: 'Apple'},
-            {id: 'orange', text: 'Orange'}
-          ]}]
-        },
-        {id: 'meat', text: 'Meat', nodes: [
-          {id: 'beef', text: 'Beef'},
-          {id: 'lamb', text: 'Lamb'}
-        ]}
-      ]
-    });
-
+    // ToDo: extract
+    var appRoutes = [
+      d(Route, {key: '/', path: '/', component: TreeView}) // ToDo: avoid warning from react when leaving out key here
+    ];
+    var appRouter = d(Router, d(Route, {component: AppView}, appRoutes));
     var appElement = document.getElementById('app');
-    ReactDOM.render(appView, appElement);
+    ReactDOM.render(appRouter, appElement);
   }
 
   return main;
