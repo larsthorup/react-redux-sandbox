@@ -18,7 +18,7 @@ module.exports = function () {
       recycle: true
     },
     bootstrap: function (wallaby) {
-      require('./test/mocha_setup');
+      require('./test/mocha.main');
     }
   };
 };

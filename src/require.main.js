@@ -2,9 +2,9 @@
 
 // Note: require.conf.js is already loaded by now
 require.config({
-  deps: ['app'],
+  deps: ['react.main'],
 
-  callback: function (app) {
-    app();
+  callback: function (main) {
+    main();
   }
 });

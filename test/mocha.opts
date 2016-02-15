@@ -1,4 +1,3 @@
 --reporter spec
---require test/mocha_setup
---require src/treeview
+--require test/mocha.main
 --recursive src/**/*.test.js

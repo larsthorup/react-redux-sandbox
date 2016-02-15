@@ -13,11 +13,11 @@
   'react',
   'react-dom',
   'jsnox',
-  './treeView'
+  './component/treeView'
 ], function (React, ReactDOM, jsnox, TreeView) {
   var d = jsnox(React);
 
-  function app () {
+  function main () {
     var appView = d(TreeView, {
       nodes: [
         {id: 'vegetable', text: 'Vegetable', nodes: [
@@ -37,5 +37,5 @@
     ReactDOM.render(appView, appElement);
   }
 
-  return app;
+  return main;
 }));
