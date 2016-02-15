@@ -6,4 +6,4 @@ global.React = require('react');
 global.d = global.jsnox(global.React);
 
 // Chai setup
-chai.should();
+global.should = chai.should();

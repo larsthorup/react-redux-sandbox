@@ -16,7 +16,8 @@
   var d = jsnox(React);
 
   function TreeNode (props) {
-    return d('span', null, props.text);
+    var spanProps = props.current ? {className: 'current'} : null;
+    return d('span', spanProps, props.text);
   }
 
   TreeNode.propTypes = {
