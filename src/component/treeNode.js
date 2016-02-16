@@ -1,36 +1,23 @@
-/* eslint-env browser, amd */
-(function (depNames, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(depNames, factory);
-  } else if (typeof exports === 'object') {
-    var deps = [];
-    for (var i = 0; i < depNames.length; ++i) {
-      deps.push(require(depNames[i]));
-    }
-    module.exports = factory.apply(this, deps);
-  }
-}([
-  'react',
-  'jsnox'
-], function (React, jsnox) {
-  var d = jsnox(React);
+var React = require('react');
+var jsnox = require('jsnox');
 
-  function TreeNode (props) {
-    var spanProps = {
-      onClick: function () {
-        props.setCurrentNode(props.id);
-      }
-    };
-    if (props.current) {
-      spanProps.className = 'current';
-    }
-    return d('span', spanProps, props.text);
-  }
+var d = jsnox(React);
 
-  TreeNode.propTypes = {
-    id: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired
+function TreeNode (props) {
+  var spanProps = {
+    onClick: function () {
+      props.setCurrentNode(props.id);
+    }
   };
+  if (props.current) {
+    spanProps.className = 'current';
+  }
+  return d('span', spanProps, props.text);
+}
 
-  return TreeNode;
-}));
+TreeNode.propTypes = {
+  id: React.PropTypes.string.isRequired,
+  text: React.PropTypes.string.isRequired
+};
+
+module.exports = TreeNode;

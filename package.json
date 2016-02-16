@@ -5,7 +5,8 @@
   "scripts": {
     "lint": "semistandard --verbose",
     "mocha": "istanbul --config=test/istanbul.conf.js cover node_modules/mocha/bin/_mocha",
-    "test": "npm run lint && npm run mocha"
+    "build": "webpack --hide-modules --config tools/webpack.config.js && node tools/build",
+    "test": "npm run lint && npm run mocha && npm run build"
   },
   "repository": {
     "type": "git",
@@ -16,11 +17,14 @@
   "homepage": "https://github.com/larsthorup/react-redux-sandbox#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "fs-extra": "^0.26.5",
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
     "semistandard": "^7.0.5",
-    "skin-deep": "^0.14.0"
+    "skin-deep": "^0.14.0",
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "jsnox": "^2.1.2",
@@ -30,7 +34,6 @@
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
-    "redux": "^3.3.1",
-    "requirejs": "^2.1.22"
+    "redux": "^3.3.1"
   }
 }
