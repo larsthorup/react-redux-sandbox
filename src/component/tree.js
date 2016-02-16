@@ -30,6 +30,7 @@
 
   function mapStateToProps (state) {
     // ToDo: extract sub state needed by this component
+    // ToDo: how to extract different substates for different component instances?
     return state;
   }
 

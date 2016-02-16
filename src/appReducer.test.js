@@ -1,6 +1,5 @@
 /* eslint-env amd, mocha */
 
-// ToDo: also run test in browser
 (function (depNames, factory) {
   if (typeof define === 'function' && define.amd) {
     define(depNames, factory);

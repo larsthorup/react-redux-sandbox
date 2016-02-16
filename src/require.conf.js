@@ -3,6 +3,7 @@ require.config({
 
   paths: {
     'jsnox': '../node_modules/jsnox/jsnox',
+    'ramda': '../node_modules/ramda/dist/ramda',
     'react': '../node_modules/react/dist/react',
     'react-dom': '../node_modules/react-dom/dist/react-dom',
     'react-redux': '../node_modules/react-redux/dist/react-redux',
