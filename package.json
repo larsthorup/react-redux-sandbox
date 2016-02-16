@@ -4,9 +4,11 @@
   "description": "sandbox for react and redux",
   "scripts": {
     "lint": "semistandard --verbose",
-    "mocha": "istanbul --config=test/istanbul.conf.js cover node_modules/mocha/bin/_mocha",
+    "test:node": "istanbul --config=test/istanbul.conf.js cover node_modules/mocha/bin/_mocha",
+    "test:chrome": "karma start --browsers Chrome --single-run",
     "build": "webpack --hide-modules --config tools/webpack.config.js && node tools/build",
-    "test": "npm run lint && npm run mocha && npm run build"
+    "build:test": "webpack --hide-modules --config tools/webpack.test.config.js",
+    "test": "npm run lint && npm run test:node && npm run build && npm run build:test && npm run test:chrome"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,9 @@
     "chai": "^3.5.0",
     "fs-extra": "^0.26.5",
     "istanbul": "^0.4.2",
+    "karma": "^0.13.21",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-mocha": "^0.2.2",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
     "semistandard": "^7.0.5",

@@ -1,3 +1,4 @@
+// Note: this file must be in the root: https://github.com/wallabyjs/public/issues/68
 module.exports = function () {
   return {
     // debug: true,
