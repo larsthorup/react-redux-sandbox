@@ -10,8 +10,9 @@
     "build": "webpack --hide-modules --config tools/webpack.config.js && node tools/build",
     "build:test": "webpack --hide-modules --config test/webpack.test.config.js",
     "test": "npm run lint && npm run test:node && npm run build && npm run build:test && npm run test:chrome",
+    "test:travis": "npm run lint && npm run test:node && npm run build",
     "coveralls": "coveralls < output/coverage/lcov.info",
-    "travis": "npm test && npm run coveralls"
+    "travis": "npm test:travis && npm run coveralls"
   },
   "repository": {
     "type": "git",
