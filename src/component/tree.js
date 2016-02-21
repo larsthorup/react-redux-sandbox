@@ -26,5 +26,6 @@ var Container = connect(mapStateToProps, Action)(Tree);
 
 module.exports = {
   View: Tree,
-  Container: Container
+  Container: Container,
+  mapStateToProps: mapStateToProps
 };

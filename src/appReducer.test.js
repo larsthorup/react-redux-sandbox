@@ -7,8 +7,8 @@ describe('appReducer', function () {
   describe('setState', function () {
     it('should replace the state', function () {
       var action = Action.setState({some: 'state'});
-      var previousState; // Note: undefined
-      var state = appReducer(previousState, action);
+      var initialState; // Note: is undefined
+      var state = appReducer(initialState, action);
       state.should.deep.equal({some: 'state'});
     });
   });
@@ -30,6 +30,15 @@ describe('appReducer', function () {
         ]
       });
       // ToDo: verify that unchanged branches stays as the original object references
+    });
+  });
+
+  describe('unknown action', function () {
+    it('should be ignored', function () {
+      var action = {type: 'UNKNOWN'};
+      var previousState = {some: 'state'};
+      var state = appReducer(previousState, action);
+      state.should.deep.equal({some: 'state'});
     });
   });
 });

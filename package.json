@@ -33,6 +33,7 @@
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
     "semistandard": "^7.0.5",
+    "sinon": "^2.0.0-pre",
     "skin-deep": "^0.14.0",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"

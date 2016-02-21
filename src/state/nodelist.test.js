@@ -27,5 +27,17 @@ describe('T', function () {
         {id: 'vegetable', nodelist: [{id: 'carrot'}]}
       ]);
     });
+
+    it('should not change when not needed', function () {
+      var nodelist = [
+        {id: 'fruit', nodelist: [{id: 'orange'}]},
+        {id: 'vegetable', nodelist: [{current: true, id: 'carrot'}]}
+      ];
+      var result = T.toggle('nodelist', 'current', function (n) { return n.id === 'carrot'; }, nodelist);
+      result.should.deep.equal([
+        {id: 'fruit', nodelist: [{id: 'orange'}]},
+        {id: 'vegetable', nodelist: [{current: true, id: 'carrot'}]}
+      ]);
+    });
   });
 });

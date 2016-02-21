@@ -1,6 +1,8 @@
 /* eslint-env mocha */
-/* global should */
 
+var chai = require('chai');
+var should = chai.should();
+var sinon = require('sinon');
 var React = require('react');
 var jsnox = require('jsnox');
 var sd = require('skin-deep');
@@ -28,5 +30,13 @@ describe('TreeNode', function () {
       });
     });
   });
-  it('setCurrentNode');
+  describe('setCurrentNode', function () {
+    it('should invoke props callback', function () {
+      var model = {id: 'node', text: 'aNodeText', setCurrentNode: sinon.spy()};
+      var view = d(TreeNode, model);
+      var span = sd.shallowRender(view).subTree('span');
+      span.props.onClick();
+      model.setCurrentNode.calledWith().should.equal(true);
+    });
+  });
 });
