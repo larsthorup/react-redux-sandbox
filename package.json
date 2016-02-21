@@ -9,7 +9,9 @@
     "test:debug": "karma start test/karma.conf.js --browsers Firefox",
     "build": "webpack --hide-modules --config tools/webpack.config.js && node tools/build",
     "build:test": "webpack --hide-modules --config test/webpack.test.config.js",
-    "test": "npm run lint && npm run test:node && npm run build && npm run build:test && npm run test:chrome"
+    "test": "npm run lint && npm run test:node && npm run build && npm run build:test && npm run test:chrome",
+    "coveralls": "coveralls < output/coverage/lcov.info",
+    "travis": "npm test && npm run coveralls"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
   "homepage": "https://github.com/larsthorup/react-redux-sandbox#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.11.6",
     "fs-extra": "^0.26.5",
     "istanbul": "^0.4.2",
     "karma": "^0.13.21",
