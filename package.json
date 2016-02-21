@@ -5,9 +5,9 @@
   "scripts": {
     "lint": "semistandard --verbose",
     "test:node": "istanbul --config=test/istanbul.conf.js cover node_modules/mocha/bin/_mocha",
-    "test:chrome": "karma start --browsers Chrome --single-run",
+    "test:chrome": "karma start test/karma.conf.js --browsers Chrome --single-run",
     "build": "webpack --hide-modules --config tools/webpack.config.js && node tools/build",
-    "build:test": "webpack --hide-modules --config tools/webpack.test.config.js",
+    "build:test": "webpack --hide-modules --config test/webpack.test.config.js",
     "test": "npm run lint && npm run test:node && npm run build && npm run build:test && npm run test:chrome"
   },
   "repository": {

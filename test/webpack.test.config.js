@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    './karma-webpack.main.js'
+    './test/karma-webpack.main.js'
   ],
   output: {
     path: './output/test',

@@ -1,7 +1,7 @@
-// ToDo: could this file be moved to tools folder?
-
 module.exports = function (config) {
   config.set({
+    basePath: '..',
+
     browsers: [ 'Chrome' ],
 
     files: [
