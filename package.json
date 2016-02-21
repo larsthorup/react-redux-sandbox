@@ -12,7 +12,7 @@
     "test": "npm run lint && npm run test:node && npm run build && npm run build:test && npm run test:chrome",
     "test:travis": "npm run lint && npm run test:node && npm run build",
     "coveralls": "coveralls < output/coverage/lcov.info",
-    "travis": "npm test:travis && npm run coveralls"
+    "travis": "npm run test:travis && npm run coveralls"
   },
   "repository": {
     "type": "git",
