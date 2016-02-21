@@ -6,6 +6,7 @@
     "lint": "semistandard --verbose",
     "test:node": "istanbul --config=test/istanbul.conf.js cover node_modules/mocha/bin/_mocha",
     "test:chrome": "karma start test/karma.conf.js --browsers Chrome --single-run",
+    "test:debug": "karma start test/karma.conf.js --browsers Firefox",
     "build": "webpack --hide-modules --config tools/webpack.config.js && node tools/build",
     "build:test": "webpack --hide-modules --config test/webpack.test.config.js",
     "test": "npm run lint && npm run test:node && npm run build && npm run build:test && npm run test:chrome"
@@ -23,6 +24,7 @@
     "istanbul": "^0.4.2",
     "karma": "^0.13.21",
     "karma-chrome-launcher": "^0.2.2",
+    "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.2",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",

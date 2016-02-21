@@ -8,8 +8,8 @@ module.exports = {
     path: './output/test',
     publicPath: '/',
     filename: 'karma-webpack.js'
-    // ToDo: source maps
   },
+  devtool: 'eval-source-map',
   plugins: [
     new webpack.IgnorePlugin(/ReactContext/) // Note: see https://github.com/glenjamin/skin-deep
   ]
