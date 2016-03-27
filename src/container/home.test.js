@@ -2,6 +2,7 @@
 
 var React = require('react');
 var jsnox = require('jsnox');
+var sinon = require('sinon');
 var sd = require('skin-deep');
 var Home = require('./home');
 
@@ -78,5 +79,15 @@ describe('Home', function () {
     });
 
     it('should verify memoization');
+  });
+
+  describe('mapDispatchToProps', function () {
+    it('should support parameterized actions creators', function () {
+      var dispatch = sinon.spy();
+      var props = Home.mapDispatchToProps(dispatch);
+      var setCurrentNode = props.setCurrent('food');
+      setCurrentNode('orange');
+      dispatch.lastCall.args.should.deep.equal([{type: 'SET_CURRENT', entity: 'food', id: 'orange'}]);
+    });
   });
 });

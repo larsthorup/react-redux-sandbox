@@ -7,17 +7,19 @@ var Tree = require('../component/tree');
 var d = jsnox(React);
 var connect = ReactRedux.connect;
 
+function makeTreeProps (homeProps, entity) {
+  var key = {key: entity};
+  var setCurrentNode = {setCurrentNode: homeProps.setCurrent(entity)};
+  var entityProps = homeProps[entity];
+  return Object.assign({}, key, setCurrentNode, entityProps);
+}
+
 function Home (props) {
-  // ToDo: how to select and propagate relevant actions?
-  // ToDo: how to add action context up the component path
   return d('div', null, [
     d('p', {key: 'foodHeader'}, 'Food'),
-    // ToDo: assocKey(key, props)
-    // ToDo: generic props.setCurrent('food')
-    d(Tree, Object.assign({}, {key: 'food'}, {setCurrentNode: props.setCurrentFood}, props.food)),
-    // ToDo: does plain HTML elements need a key?
+    d(Tree, makeTreeProps(props, 'food')),
     d('p', {key: 'placeHeader'}, 'Places'),
-    d(Tree, Object.assign({}, {key: 'place'}, {setCurrentNode: props.setCurrentPlace}, props.place))
+    d(Tree, makeTreeProps(props, 'place'))
   ]);
 }
 
@@ -69,10 +71,24 @@ function mapStateToProps (state) {
   return homeProps;
 }
 
-var Container = connect(mapStateToProps, Action)(Home);
+function mapDispatchToProps (dispatch) {
+  return {
+    setCurrent: function (entity) {
+      var actionCreator = Action.setCurrent(entity);
+      var dispatcher = function (id) {
+        var action = actionCreator(id);
+        dispatch(action);
+      };
+      return dispatcher;
+    }
+  };
+}
+
+var Container = connect(mapStateToProps, mapDispatchToProps)(Home);
 
 module.exports = {
   View: Home,
   Container: Container,
-  mapStateToProps: mapStateToProps
+  mapStateToProps: mapStateToProps,
+  mapDispatchToProps: mapDispatchToProps
 };

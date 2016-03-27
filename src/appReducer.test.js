@@ -15,7 +15,7 @@ describe('appReducer', function () {
 
   describe('setCurrent', function () { // ToDo: modular reducers
     it('should move current flag to specified node', function () {
-      var action = Action.setCurrentFood('orange');
+      var action = Action.setCurrent('food')('orange');
       var previousState = {current: {food: 'apple', place: 'africa'}};
       var state = appReducer(previousState, action);
       state.should.deep.equal({current: {food: 'orange', place: 'africa'}});

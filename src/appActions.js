@@ -17,8 +17,7 @@ function setCurrent (entity) {
 
 var appActions = {
   setState: setState,
-  setCurrentFood: setCurrent('food'),
-  setCurrentPlace: setCurrent('place')
+  setCurrent: setCurrent
 };
 
 module.exports = appActions;
