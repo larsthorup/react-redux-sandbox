@@ -1,4 +1,4 @@
-var R = require('ramda');
+var S = require('./state/state');
 var Action = require('./appActions');
 
 function setState (state, action) {
@@ -6,10 +6,7 @@ function setState (state, action) {
 }
 
 function setCurrent (state, action) {
-  // ToDo: return S.assoc(['current', action.entity], action.id, state)
-  var current = R.assoc(action.entity, action.id, state.current);
-  var newState = R.assoc('current', current, state);
-  return newState;
+  return S.assoc(['current', action.entity], action.id, state);
 }
 
 function appReducer (state, action) {
