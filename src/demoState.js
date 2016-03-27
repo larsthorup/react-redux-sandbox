@@ -1,27 +1,29 @@
 // ToDo: consider using https://github.com/gaearon/normalizr
 var demoState = {
-  food: {
-    nodes: [
-      {current: true, id: 'vegetable', text: 'Vegetable', nodes: [
-        {id: 'fruit', text: 'Fruit', nodes: [
-          {id: 'apple', text: 'Apple'},
-          {id: 'orange', text: 'Orange'}
-        ]}]
-      },
-      {id: 'meat', text: 'Meat', nodes: [
-        {id: 'beef', text: 'Beef'},
-        {id: 'lamb', text: 'Lamb'}
-      ]}
-    ]
+  current: {
+    food: 'vegetable',
+    place: 'africa'
   },
-  place: {
-    nodes: [
-      {id: 'earth', text: 'Earth', nodes: [
-        {id: 'europe', text: 'Europe'},
-        {current: true, id: 'africa', text: 'Africa'}
-      ]},
-      {id: 'mars', text: 'Mars'}
-    ]
+  roots: { // ToDo: avoid these since they can be computed
+    food: ['vegetable', 'meat'],
+    place: ['earth', 'mars']
+  },
+  entities: {
+    food: {
+      'vegetable': {name: 'Vegetable', subtypes: ['fruit']},
+      'fruit': {name: 'Fruit', subtypes: ['apple', 'orange']},
+      'apple': {name: 'Apple', subtypes: []},
+      'orange': {name: 'Orange', subtypes: []},
+      'meat': {name: 'Meat', subtypes: ['beef', 'lamb']},
+      'beef': {name: 'Beef', subtypes: []},
+      'lamb': {name: 'Lamb', subtypes: []}
+    },
+    place: {
+      'earth': {name: 'Earth', places: ['europe', 'africa']},
+      'europe': {name: 'Europe', places: []},
+      'africa': {name: 'Africa', places: []},
+      'mars': {name: 'Mars', places: []}
+    }
   }
 };
 

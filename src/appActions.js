@@ -5,16 +5,20 @@ function setState (state) {
   };
 }
 
-function setCurrentNode (id) {
-  return {
-    type: 'TREE.SET_CURRENT_NODE',
-    id: id
+function setCurrent (entity) {
+  return function (id) {
+    return {
+      type: 'SET_CURRENT',
+      entity: entity,
+      id: id
+    };
   };
 }
 
 var appActions = {
   setState: setState,
-  setCurrentNode: setCurrentNode
+  setCurrentFood: setCurrent('food'),
+  setCurrentPlace: setCurrent('place')
 };
 
 module.exports = appActions;

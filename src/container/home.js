@@ -13,10 +13,11 @@ function Home (props) {
   return d('div', null, [
     d('p', {key: 'foodHeader'}, 'Food'),
     // ToDo: assocKey(key, props)
-    d(Tree, Object.assign({}, {key: 'food'}, {setCurrentNode: props.setCurrentNode}, props.food)),
+    // ToDo: generic props.setCurrent('food')
+    d(Tree, Object.assign({}, {key: 'food'}, {setCurrentNode: props.setCurrentFood}, props.food)),
     // ToDo: does plain HTML elements need a key?
-    d('h2', {key: 'placeHeader'}, 'Places'),
-    d(Tree, Object.assign({}, {key: 'place'}, {setCurrentNode: props.setCurrentNode}, props.place))
+    d('p', {key: 'placeHeader'}, 'Places'),
+    d(Tree, Object.assign({}, {key: 'place'}, {setCurrentNode: props.setCurrentPlace}, props.place))
   ]);
 }
 
@@ -25,10 +26,47 @@ Home.propTypes = {
   place: React.PropTypes.object.isRequired
 };
 
+function mapStateToTreeNodeListProps (options) {
+  var treeNodeListProps = options.nodeIds.map(function (nodeId) {
+    var node = options.state.entities[options.entity][nodeId];
+    var id = {id: nodeId};
+    var nodeIds = node[options.childProp];
+    var nodes = nodeIds && nodeIds.length > 0 ? {
+      nodes: mapStateToTreeNodeListProps(Object.assign({}, options, {
+        nodeIds: nodeIds
+      }))
+    } : {};
+    var current = nodeId === options.state.current[options.entity] ? {current: true} : {};
+    return Object.assign(id, nodes, current, options.mapNode(node));
+  });
+  return treeNodeListProps;
+}
+
+function mapStateToTreeProps (options) {
+  options.nodeIds = options.state.roots[options.entity];
+  var treeProps = {
+    nodes: mapStateToTreeNodeListProps(options)
+  };
+  return treeProps;
+}
+
 function mapStateToProps (state) {
-  // ToDo: extract sub state needed by this component
-  // ToDo: how to extract different substates for different component instances?
-  return state;
+  // ToDo: use memoization to minimize re-rendering
+  var homeProps = {
+    food: mapStateToTreeProps({
+      state: state,
+      entity: 'food',
+      childProp: 'subtypes',
+      mapNode: function (food) { return {text: food.name}; }
+    }),
+    place: mapStateToTreeProps({
+      state: state,
+      entity: 'place',
+      childProp: 'places',
+      mapNode: function (place) { return {text: place.name}; }
+    })
+  };
+  return homeProps;
 }
 
 var Container = connect(mapStateToProps, Action)(Home);

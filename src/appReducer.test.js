@@ -13,22 +13,12 @@ describe('appReducer', function () {
     });
   });
 
-  describe('tree.setCurrentNode', function () { // ToDo: modular reducers
+  describe('setCurrent', function () { // ToDo: modular reducers
     it('should move current flag to specified node', function () {
-      var action = Action.setCurrentNode('orange');
-      var previousState = { food: {
-        nodes: [
-          {current: true, id: 'apple'},
-          {id: 'orange'}
-        ]
-      }};
+      var action = Action.setCurrentFood('orange');
+      var previousState = {current: {food: 'apple', place: 'africa'}};
       var state = appReducer(previousState, action);
-      state.should.deep.equal({ food: {
-        nodes: [
-          {id: 'apple'},
-          {current: true, id: 'orange'}
-        ]
-      }});
+      state.should.deep.equal({current: {food: 'orange', place: 'africa'}});
       // ToDo: verify that unchanged branches stays as the original object references
     });
   });

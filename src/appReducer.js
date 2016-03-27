@@ -1,25 +1,24 @@
-var T = require('./state/nodelist');
+var R = require('ramda');
 
 function setState (state, action) {
   // ToDo: use R.merge
   return action.state;
 }
 
-function setCurrentNode (state, action) {
-  var domain = 'food'; // ToDo: get rid of this via flattening the state tree
-  var nodes = T.toggle('nodes', 'current', function (node) { return node.id === action.id; }, state[domain].nodes);
-  var newState = Object.assign({}, state);
-  newState[domain] = {nodes: nodes};
+function setCurrent (state, action) {
+  // ToDo: return S.assoc(['current', action.entity], action.id, state)
+  var current = R.assoc(action.entity, action.id, state.current);
+  var newState = R.assoc('current', current, state);
   return newState;
 }
 
 function appReducer (state, action) {
   state = state || {};
   switch (action.type) {
-    case 'SET_STATE': // ToDo: DYI
+    case 'SET_STATE': // ToDo: DRY
       return setState(state, action);
-    case 'TREE.SET_CURRENT_NODE': // ToDo: namespace
-      return setCurrentNode(state, action);
+    case 'SET_CURRENT':
+      return setCurrent(state, action);
     default:
       return state;
   }
