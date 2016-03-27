@@ -1,7 +1,7 @@
 var R = require('ramda');
+var Action = require('./appActions');
 
 function setState (state, action) {
-  // ToDo: use R.merge
   return action.state;
 }
 
@@ -15,9 +15,9 @@ function setCurrent (state, action) {
 function appReducer (state, action) {
   state = state || {};
   switch (action.type) {
-    case 'SET_STATE': // ToDo: DRY
+    case Action.setState.actionType:
       return setState(state, action);
-    case 'SET_CURRENT':
+    case Action.setCurrent.actionType:
       return setCurrent(state, action);
     default:
       return state;

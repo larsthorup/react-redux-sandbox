@@ -28,7 +28,7 @@ describe('Home', function () {
           food: 'vegetable',
           place: 'africa'
         },
-        roots: { // ToDo: avoid these since they can be computed
+        roots: {
           food: ['vegetable', 'meat'],
           place: ['earth', 'mars']
         },

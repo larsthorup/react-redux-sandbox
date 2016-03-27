@@ -1,19 +1,21 @@
 function setState (state) {
   return {
-    type: 'SET_STATE',
+    type: setState.actionType,
     state: state
   };
 }
+setState.actionType = 'SET_STATE';
 
 function setCurrent (entity) {
   return function (id) {
     return {
-      type: 'SET_CURRENT',
+      type: setCurrent.actionType,
       entity: entity,
       id: id
     };
   };
 }
+setCurrent.actionType = 'SET_CURRENT';
 
 var appActions = {
   setState: setState,
