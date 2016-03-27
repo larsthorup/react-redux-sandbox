@@ -16,19 +16,19 @@ describe('appReducer', function () {
   describe('tree.setCurrentNode', function () { // ToDo: modular reducers
     it('should move current flag to specified node', function () {
       var action = Action.setCurrentNode('orange');
-      var previousState = {
+      var previousState = { food: {
         nodes: [
           {current: true, id: 'apple'},
           {id: 'orange'}
         ]
-      };
+      }};
       var state = appReducer(previousState, action);
-      state.should.deep.equal({
+      state.should.deep.equal({ food: {
         nodes: [
           {id: 'apple'},
           {current: true, id: 'orange'}
         ]
-      });
+      }});
       // ToDo: verify that unchanged branches stays as the original object references
     });
   });

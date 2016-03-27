@@ -6,9 +6,10 @@ function setState (state, action) {
 }
 
 function setCurrentNode (state, action) {
-  var nodes = T.toggle('nodes', 'current', function (node) { return node.id === action.id; }, state.nodes);
+  var domain = 'food'; // ToDo: get rid of this via flattening the state tree
+  var nodes = T.toggle('nodes', 'current', function (node) { return node.id === action.id; }, state[domain].nodes);
   var newState = Object.assign({}, state);
-  newState.nodes = nodes;
+  newState[domain] = {nodes: nodes};
   return newState;
 }
 
