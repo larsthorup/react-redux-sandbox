@@ -34,14 +34,14 @@
     "react-addons-test-utils": "^0.14.7",
     "semistandard": "^7.0.5",
     "sinon": "^2.0.0-pre",
-    "skin-deep": "^0.14.0",
+    "skin-deep": "^0.16.0",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "jsnox": "^2.1.2",
     "purecss": "^0.6.0",
-    "ramda": "^0.19.1",
+    "ramda": "^0.20.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
