@@ -2,7 +2,7 @@ var React = require('react');
 var jsnox = require('jsnox');
 var ReactRedux = require('react-redux');
 var Action = require('../appActions');
-var Tree = require('../component/Tree');
+var Tree = require('../component/tree');
 
 var d = jsnox(React);
 var connect = ReactRedux.connect;
