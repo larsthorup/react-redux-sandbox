@@ -1,8 +1,15 @@
+var R = require('ramda');
 var S = require('./state');
 var A = require('./action');
 
 function setState (state, action) {
   return action.state;
+}
+
+function addState (state, action) {
+  // ToDo: use R.pipe
+  var mergedEntities = S.assoc(['entities'], R.merge(state.entities, action.state.entities), state);
+  return S.assoc(['entities', 'tree'], R.merge(state.entities.tree, action.state.entities.tree), mergedEntities);
 }
 
 function setCurrent (state, action) {
@@ -27,6 +34,8 @@ function appReducer (state, action) {
   switch (action.type) {
     case A.setState.actionType:
       return setState(state, action);
+    case A.addState.actionType:
+      return addState(state, action);
     case A.addTree.actionType:
       return addTree(state, action);
     case A.addTreeNode.actionType:

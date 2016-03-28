@@ -8,6 +8,14 @@ function setState (state) {
 }
 setState.actionType = 'SET_STATE';
 
+function addState (state) {
+  return {
+    type: addState.actionType,
+    state: state
+  };
+}
+addState.actionType = 'ADD_STATE';
+
 function addTree (entity) {
   return {
     type: addTree.actionType,
@@ -54,6 +62,7 @@ setCurrent.actionType = 'SET_CURRENT';
 
 module.exports = {
   setState: setState,
+  addState: addState,
   addTree: addTree,
   addTreeNode: addTreeNode,
   renameTreeNode: renameTreeNode,

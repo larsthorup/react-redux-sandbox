@@ -1,10 +1,9 @@
 // ToDo: consider using https://github.com/gaearon/normalizr
 // ToDo: use builder
-var demoState = {
+var food = {
   entities: {
     tree: {
-      food: {roots: ['vegetable', 'meat'], current: 'vegetable', isFetching: false},
-      place: {roots: ['earth', 'mars'], current: 'africa', isFetching: false}
+      food: {roots: ['vegetable', 'meat'], current: 'vegetable', isFetching: false}
     },
     food: {
       'vegetable': {name: 'Vegetable', subtypes: ['fruit']},
@@ -14,6 +13,14 @@ var demoState = {
       'meat': {name: 'Meat', subtypes: ['beef', 'lamb']},
       'beef': {name: 'Beef', subtypes: []},
       'lamb': {name: 'Lamb', subtypes: []}
+    }
+  }
+};
+
+var place = {
+  entities: {
+    tree: {
+      place: {roots: ['earth', 'mars'], current: 'africa', isFetching: false}
     },
     place: {
       'earth': {name: 'Earth', places: ['europe', 'africa']},
@@ -24,4 +31,7 @@ var demoState = {
   }
 };
 
-module.exports = demoState;
+module.exports = {
+  food: food,
+  place: place
+};
