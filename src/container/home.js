@@ -7,25 +7,26 @@ var Tree = require('../component/tree');
 var d = jsnox(React);
 var connect = ReactRedux.connect;
 
-function makeTreeProps (homeProps, entity) {
+function makeTreeProps (treeProps, entity, homeProps) {
   var key = {key: entity};
   var setCurrentNode = {setCurrentNode: homeProps.setCurrent(entity)};
-  var entityProps = homeProps[entity];
-  return Object.assign({}, key, setCurrentNode, entityProps);
+  return Object.assign({}, key, setCurrentNode, treeProps);
 }
 
 function Home (props) {
-  return d('div', null, [
-    d('p', {key: 'foodHeader'}, 'Food'),
-    d(Tree, makeTreeProps(props, 'food')),
-    d('p', {key: 'placeHeader'}, 'Places'),
-    d(Tree, makeTreeProps(props, 'place'))
-  ]);
+  var elems = [];
+  for (var i = 0; i < props.entities.length; ++i) {
+    var entityProps = props.entities[i];
+    var entity = entityProps.entity;
+    elems = elems.concat([
+      d('p', {key: entity + 'Header'}, entity),
+      d(Tree, makeTreeProps(entityProps.tree, entity, props))
+    ]);
+  }
+  return d('div', null, elems);
 }
 
 Home.propTypes = {
-  food: React.PropTypes.object.isRequired,
-  place: React.PropTypes.object.isRequired
 };
 
 function mapStateToTreeNodeListProps (options) {
@@ -49,23 +50,29 @@ function mapStateToTreeProps (options) {
   var treeProps = {
     nodes: mapStateToTreeNodeListProps(options)
   };
-  return treeProps;
+  return {entity: options.entity, tree: treeProps};
 }
+
+var childProp = {
+  'food': 'subtypes',
+  'place': 'places'
+};
+
+var mapNode = {
+  'food': function (food) { return {text: food.name}; },
+  'place': function (place) { return {text: place.name}; }
+};
 
 function mapStateToProps (state) {
   // ToDo: use memoization to minimize re-rendering
   var homeProps = {
-    food: mapStateToTreeProps({
-      state: state,
-      entity: 'food',
-      childProp: 'subtypes',
-      mapNode: function (food) { return {text: food.name}; }
-    }),
-    place: mapStateToTreeProps({
-      state: state,
-      entity: 'place',
-      childProp: 'places',
-      mapNode: function (place) { return {text: place.name}; }
+    entities: Object.keys(state.entities.tree).map(function (entity) {
+      return mapStateToTreeProps({
+        state: state,
+        entity: entity,
+        childProp: childProp[entity],
+        mapNode: mapNode[entity]
+      });
     })
   };
   return homeProps;

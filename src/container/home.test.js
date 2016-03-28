@@ -11,18 +11,19 @@ var d = jsnox(React);
 describe('Home', function () {
   describe('View', function () {
     it('should create a div with food and place trees', function () {
-      var model = {food: {nodes: []}, place: {nodes: []}, setCurrent: function () {}};
+      var model = {entities: [{entity: 'food', tree: {nodes: []}}, {entity: 'place', tree: {nodes: []}}], setCurrent: function () {}};
       var view = d(Home.View, model);
       var dom = sd.shallowRender(view);
-      dom.text().should.equal('Food<Tree />Places<Tree />'); // Note: debugging demo
+      dom.text().should.equal('food<Tree />place<Tree />'); // Note: debugging demo
       var trees = dom.everySubTree('Tree');
-      trees[0].props.nodes.should.equal(model.food.nodes);
-      trees[1].props.nodes.should.equal(model.place.nodes);
+      trees[0].props.nodes.should.equal(model.entities[0].tree.nodes);
+      trees[1].props.nodes.should.equal(model.entities[1].tree.nodes);
     });
   });
 
   describe('mapStateToProps', function () {
     it('should return the proper sub state', function () {
+      // ToDo: use builder
       var state = {
         entities: {
           tree: {
@@ -48,29 +49,37 @@ describe('Home', function () {
       };
       var props = Home.mapStateToProps(state);
       props.should.deep.equal({
-        food: {
-          nodes: [
-            {current: true, id: 'vegetable', text: 'Vegetable', nodes: [
-              {id: 'fruit', text: 'Fruit', nodes: [
-                {id: 'apple', text: 'Apple'},
-                {id: 'orange', text: 'Orange'}
-              ]}]
-            },
-            {id: 'meat', text: 'Meat', nodes: [
-              {id: 'beef', text: 'Beef'},
-              {id: 'lamb', text: 'Lamb'}
-            ]}
-          ]
-        },
-        place: {
-          nodes: [
-            {id: 'earth', text: 'Earth', nodes: [
-              {id: 'europe', text: 'Europe'},
-              {current: true, id: 'africa', text: 'Africa'}
-            ]},
-            {id: 'mars', text: 'Mars'}
-          ]
-        }
+        entities: [
+          {
+            entity: 'food',
+            tree: {
+              nodes: [
+                {current: true, id: 'vegetable', text: 'Vegetable', nodes: [
+                  {id: 'fruit', text: 'Fruit', nodes: [
+                    {id: 'apple', text: 'Apple'},
+                    {id: 'orange', text: 'Orange'}
+                  ]}]
+                },
+                {id: 'meat', text: 'Meat', nodes: [
+                  {id: 'beef', text: 'Beef'},
+                  {id: 'lamb', text: 'Lamb'}
+                ]}
+              ]
+            }
+          },
+          {
+            entity: 'place',
+            tree: {
+              nodes: [
+                {id: 'earth', text: 'Earth', nodes: [
+                  {id: 'europe', text: 'Europe'},
+                  {current: true, id: 'africa', text: 'Africa'}
+                ]},
+                {id: 'mars', text: 'Mars'}
+              ]
+            }
+          }
+        ]
       });
     });
 

@@ -1,3 +1,5 @@
+// ToDo: make actions FSA compliant: https://github.com/acdlite/flux-standard-action
+
 function setState (state) {
   return {
     type: setState.actionType,
