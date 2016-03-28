@@ -6,11 +6,10 @@ function setState (state, action) {
 }
 
 function setCurrent (state, action) {
-  return S.assoc(['current', action.entity], action.id, state);
+  return S.assoc(['entities', 'tree', action.entity, 'current'], action.id, state);
 }
 
 function appReducer (state, action) {
-  state = state || {};
   switch (action.type) {
     case Action.setState.actionType:
       return setState(state, action);

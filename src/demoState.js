@@ -1,14 +1,10 @@
 // ToDo: consider using https://github.com/gaearon/normalizr
 var demoState = {
-  current: {
-    food: 'vegetable',
-    place: 'africa'
-  },
-  roots: { // ToDo: avoid these since they can be computed
-    food: ['vegetable', 'meat'],
-    place: ['earth', 'mars']
-  },
   entities: {
+    tree: {
+      food: {roots: ['vegetable', 'meat'], current: 'vegetable', isFetching: false},
+      place: {roots: ['earth', 'mars'], current: 'africa', isFetching: false}
+    },
     food: {
       'vegetable': {name: 'Vegetable', subtypes: ['fruit']},
       'fruit': {name: 'Fruit', subtypes: ['apple', 'orange']},

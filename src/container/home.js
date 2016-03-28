@@ -38,14 +38,14 @@ function mapStateToTreeNodeListProps (options) {
         nodeIds: nodeIds
       }))
     } : {};
-    var current = nodeId === options.state.current[options.entity] ? {current: true} : {};
+    var current = nodeId === options.state.entities.tree[options.entity].current ? {current: true} : {};
     return Object.assign(id, nodes, current, options.mapNode(node));
   });
   return treeNodeListProps;
 }
 
 function mapStateToTreeProps (options) {
-  options.nodeIds = options.state.roots[options.entity];
+  options.nodeIds = options.state.entities.tree[options.entity].roots;
   var treeProps = {
     nodes: mapStateToTreeNodeListProps(options)
   };

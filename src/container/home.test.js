@@ -24,15 +24,11 @@ describe('Home', function () {
   describe('mapStateToProps', function () {
     it('should return the proper sub state', function () {
       var state = {
-        current: {
-          food: 'vegetable',
-          place: 'africa'
-        },
-        roots: {
-          food: ['vegetable', 'meat'],
-          place: ['earth', 'mars']
-        },
         entities: {
+          tree: {
+            food: {roots: ['vegetable', 'meat'], current: 'vegetable', isFetching: false},
+            place: {roots: ['earth', 'mars'], current: 'africa', isFetching: false}
+          },
           food: {
             'vegetable': {name: 'Vegetable', subtypes: ['fruit']},
             'fruit': {name: 'Fruit', subtypes: ['apple', 'orange']},

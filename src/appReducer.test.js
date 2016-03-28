@@ -1,24 +1,30 @@
 /* eslint-env mocha */
 
 var Action = require('./appActions');
+var S = require('./state/state');
 var appReducer = require('./appReducer');
 
 describe('appReducer', function () {
   describe('setState', function () {
     it('should replace the state', function () {
-      var action = Action.setState({some: 'state'});
-      var initialState; // Note: is undefined
-      var state = appReducer(initialState, action);
-      state.should.deep.equal({some: 'state'});
+      var previousState = S.initial;
+      // ToDo: build({'food': [A.addTree]})
+      // ToDo: reduce([A.init, A.addTree('food')]);
+      var loadedState = S.loadTree({'food': {}}, S.initial());
+      var action = Action.setState(loadedState);
+      var state = appReducer(previousState, action);
+      state.should.deep.equal(loadedState);
     });
   });
 
-  describe('setCurrent', function () { // ToDo: modular reducers
+  describe('setCurrent', function () {
     it('should move current flag to specified node', function () {
+      // ToDo: build({'food': [A.addTree, {'apple': [A.addTreeNode, a.setCurrent]}]})
+      // ToDo: reduce([A.init, A.addTree('food'), A.addTreeNode('food')('apple'), A.setCurrent('food')('apple')])
+      var previousState = S.loadTree({food: {'orange': {}}, place: {'africa': {}}}, S.initial());
       var action = Action.setCurrent('food')('orange');
-      var previousState = {current: {food: 'apple', place: 'africa'}};
       var state = appReducer(previousState, action);
-      state.should.deep.equal({current: {food: 'orange', place: 'africa'}});
+      state.entities.tree.food.current.should.equal('orange');
       // ToDo: verify that unchanged branches stays as the original object references
     });
   });
