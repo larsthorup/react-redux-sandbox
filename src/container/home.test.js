@@ -11,13 +11,24 @@ var d = jsnox(React);
 describe('Home', function () {
   describe('View', function () {
     it('should create a div with food and place trees', function () {
-      var model = {entities: [{entity: 'food', tree: {nodes: []}}, {entity: 'place', tree: {nodes: []}}], setCurrent: function () {}};
+      var model = {entities: [{entity: 'food', tree: {nodes: []}}, {entity: 'place', tree: {nodes: []}}], setCurrent: function () {}, loadTree: function () {}};
       var view = d(Home.View, model);
       var dom = sd.shallowRender(view);
       dom.text().should.equal('food<Tree />place<Tree />'); // Note: debugging demo
       var trees = dom.everySubTree('Tree');
+      trees.length.should.equal(2);
       trees[0].props.nodes.should.equal(model.entities[0].tree.nodes);
       trees[1].props.nodes.should.equal(model.entities[1].tree.nodes);
+    });
+
+    it('should create buttons for missing trees', function () {
+      var model = {entities: [{entity: 'food', tree: {nodes: []}}], setCurrent: function () {}, loadTree: function () {}};
+      var view = d(Home.View, model);
+      var dom = sd.shallowRender(view);
+      dom.text().should.equal('placefood<Tree />'); // Note: debugging demo
+      var trees = dom.everySubTree('Tree');
+      trees.length.should.equal(1);
+      trees[0].props.nodes.should.equal(model.entities[0].tree.nodes);
     });
   });
 
@@ -93,6 +104,14 @@ describe('Home', function () {
       var setCurrentNode = props.setCurrent('food');
       setCurrentNode('orange');
       dispatch.lastCall.args.should.deep.equal([{type: 'SET_CURRENT', entity: 'food', id: 'orange'}]);
+    });
+
+    it('should support normal actions creators', function () {
+      var dispatch = sinon.spy();
+      var props = Home.mapDispatchToProps(dispatch);
+      var loadTree = props.loadTree('food');
+      loadTree();
+      dispatch.lastCall.args[0].type.should.equal('ADD_STATE');
     });
   });
 });

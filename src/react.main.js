@@ -5,10 +5,10 @@ var ReactRouter = require('react-router');
 var jsnox = require('jsnox');
 var Redux = require('redux');
 var ReactRedux = require('react-redux');
+var S = require('./state/state');
 var A = require('./state/action');
 var reducer = require('./state/reducer');
 var route = require('./route');
-var demo = require('./state/demo');
 
 var d = jsnox(React);
 var Router = ReactRouter.Router;
@@ -22,8 +22,7 @@ function App (props) {
 
 function main () {
   var store = createStore(reducer);
-  store.dispatch(A.setState(demo.food));
-  store.dispatch(A.addState(demo.place)); // ToDo: make into an async loaded button
+  store.dispatch(A.setState(S.initial()));
 
   var router = d(Router, {history: ReactRouter.hashHistory}, d(Route, {component: App}, route));
   var provider = d(Provider, {store: store}, router);

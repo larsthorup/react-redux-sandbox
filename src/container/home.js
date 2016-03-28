@@ -3,6 +3,7 @@ var jsnox = require('jsnox');
 var ReactRedux = require('react-redux');
 var A = require('../state/action');
 var Tree = require('../component/tree');
+var demo = require('../state/demo');
 
 var d = jsnox(React);
 var connect = ReactRedux.connect;
@@ -13,15 +14,26 @@ function makeTreeProps (treeProps, entity, homeProps) {
   return Object.assign({}, key, setCurrentNode, treeProps);
 }
 
+function makeButton (props, entity) {
+  return [d('button', {key: entity + 'Button', onClick: props.loadTree(entity)}, entity)];
+}
+
 function Home (props) {
   var elems = [];
+  var buttons = {'food': true, 'place': true};
+  // ToDo: non-procedural code
   for (var i = 0; i < props.entities.length; ++i) {
     var entityProps = props.entities[i];
     var entity = entityProps.entity;
+    delete buttons[entity];
     elems = elems.concat([
       d('p', {key: entity + 'Header'}, entity),
       d(Tree, makeTreeProps(entityProps.tree, entity, props))
     ]);
+  }
+  var entities = Object.keys(buttons);
+  for (var j = 0; j < entities.length; ++j) {
+    elems = makeButton(props, entities[j]).concat(elems);
   }
   return d('div', null, elems);
 }
@@ -84,6 +96,14 @@ function mapDispatchToProps (dispatch) {
       var actionCreator = A.setCurrent(entity);
       var dispatcher = function (id) {
         var action = actionCreator(id);
+        dispatch(action);
+      };
+      return dispatcher;
+    },
+    loadTree: function (entity) {
+      var dispatcher = function () {
+        // ToDo: use async fetchState action
+        var action = A.addState(demo[entity]);
         dispatch(action);
       };
       return dispatcher;
