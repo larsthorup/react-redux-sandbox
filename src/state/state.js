@@ -16,13 +16,7 @@ function initial () {
   };
 }
 
-function loadTree (tree, state) {
-  var entity = Object.keys(tree)[0];
-  return assoc(['entities', entity], tree, state);
-}
-
 module.exports = {
   assoc: assoc,
-  initial: initial,
-  loadTree: loadTree
+  initial: initial
 };

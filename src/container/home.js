@@ -1,7 +1,7 @@
 var React = require('react');
 var jsnox = require('jsnox');
 var ReactRedux = require('react-redux');
-var Action = require('../appActions');
+var A = require('../state/action');
 var Tree = require('../component/tree');
 
 var d = jsnox(React);
@@ -74,7 +74,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     setCurrent: function (entity) {
-      var actionCreator = Action.setCurrent(entity);
+      var actionCreator = A.setCurrent(entity);
       var dispatcher = function (id) {
         var action = actionCreator(id);
         dispatch(action);

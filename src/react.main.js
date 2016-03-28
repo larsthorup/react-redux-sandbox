@@ -5,10 +5,10 @@ var ReactRouter = require('react-router');
 var jsnox = require('jsnox');
 var Redux = require('redux');
 var ReactRedux = require('react-redux');
-var Action = require('./appActions');
-var appReducer = require('./appReducer');
-var appRoutes = require('./appRoutes');
-var demoState = require('./demoState');
+var A = require('./state/action');
+var reducer = require('./state/reducer');
+var route = require('./route');
+var demoState = require('./state/demo');
 
 var d = jsnox(React);
 var Router = ReactRouter.Router;
@@ -21,13 +21,13 @@ function App (props) {
 }
 
 function main () {
-  var store = createStore(appReducer);
-  store.dispatch(Action.setState(demoState));
+  var store = createStore(reducer);
+  store.dispatch(A.setState(demoState));
 
-  var appRouter = d(Router, {history: ReactRouter.hashHistory}, d(Route, {component: App}, appRoutes));
-  var appProvider = d(Provider, {store: store}, appRouter);
+  var router = d(Router, {history: ReactRouter.hashHistory}, d(Route, {component: App}, route));
+  var provider = d(Provider, {store: store}, router);
   var appElement = document.getElementById('app');
-  ReactDOM.render(appProvider, appElement);
+  ReactDOM.render(provider, appElement);
 }
 
 document.addEventListener('DOMContentLoaded', function () {

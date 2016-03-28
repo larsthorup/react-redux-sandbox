@@ -1,4 +1,5 @@
 // ToDo: consider using https://github.com/gaearon/normalizr
+// ToDo: use builder
 var demoState = {
   entities: {
     tree: {
