@@ -1,11 +1,17 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-  entry: [
-    './src/react.main.js'
-  ],
+  entry: {
+    app: './src/react.main.js'
+  },
   output: {
     path: './output/build',
-    publicPath: '/',
-    filename: 'app.js'
+    filename: '[name]-[hash].js'
   },
-  devtool: 'eval-source-map'
+  devtool: 'eval-source-map',
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    })
+  ]
 };
