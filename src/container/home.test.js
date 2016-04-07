@@ -11,25 +11,32 @@ var d = jsnox(React);
 
 describe('Home', function () {
   describe('View', function () {
-    it('should create a div with food and place trees', function () {
-      var model = {entities: [{entity: 'food', tree: {nodes: []}}, {entity: 'place', tree: {nodes: []}}], setCurrent: function () {}, loadTree: function () {}};
+    it('should create a div with list of trees', function () {
+      var setCurrent = sinon.spy();
+      var model = {entities: [{entity: 'food', tree: {nodes: []}}, {entity: 'place', tree: {nodes: []}}], setCurrent: setCurrent, loadTree: function () {}};
       var view = d(Home.View, model);
       var dom = sd.shallowRender(view);
       dom.text().should.equal('food<Tree />place<Tree />'); // Note: debugging demo
       var trees = dom.everySubTree('Tree');
       trees.length.should.equal(2);
       trees[0].props.nodes.should.equal(model.entities[0].tree.nodes);
+      trees[0].props.setCurrentNode('orange');
+      setCurrent.lastCall.args.should.deep.equal(['food', 'orange']);
       trees[1].props.nodes.should.equal(model.entities[1].tree.nodes);
     });
 
     it('should create buttons for missing trees', function () {
-      var model = {entities: [{entity: 'food', tree: {nodes: []}}], setCurrent: function () {}, loadTree: function () {}};
+      var loadTree = sinon.spy();
+      var model = {entities: [{entity: 'food', tree: {nodes: []}}], setCurrent: function () {}, loadTree: loadTree};
       var view = d(Home.View, model);
       var dom = sd.shallowRender(view);
-      dom.text().should.equal('placefood<Tree />'); // Note: debugging demo
       var trees = dom.everySubTree('Tree');
       trees.length.should.equal(1);
       trees[0].props.nodes.should.equal(model.entities[0].tree.nodes);
+      var buttons = dom.everySubTree('button');
+      buttons.length.should.equal(1);
+      buttons[0].props.onClick();
+      loadTree.lastCall.args.should.deep.equal(['place']);
     });
   });
 
@@ -112,16 +119,14 @@ describe('Home', function () {
     it('should support parameterized actions creators', function () {
       var dispatch = sinon.spy();
       var props = Home.mapDispatchToProps(dispatch);
-      var setCurrentNode = props.setCurrent('food');
-      setCurrentNode('orange');
+      props.setCurrent('food', 'orange');
       dispatch.lastCall.args.should.deep.equal([{type: 'SET_CURRENT', entity: 'food', id: 'orange'}]);
     });
 
     it('should support normal actions creators', function () {
       var dispatch = function () {};
       var props = Home.mapDispatchToProps(dispatch);
-      var loadTree = props.loadTree('food');
-      loadTree();
+      props.loadTree('food');
       A.fetchingState.lastCall.args[0].should.deep.equal({name: 'food'});
       this.fetchingStateDispatcher.lastCall.args[0].should.equal(dispatch);
     });

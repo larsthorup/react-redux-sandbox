@@ -62,13 +62,11 @@ function renameTreeNode (entity) {
 }
 renameTreeNode.actionType = 'RENAME_TREE_NODE';
 
-function setCurrent (entity) {
-  return function (id) {
-    return {
-      type: setCurrent.actionType,
-      entity: entity,
-      id: id
-    };
+function setCurrent (entity, id) {
+  return {
+    type: setCurrent.actionType,
+    entity: entity,
+    id: id
   };
 }
 setCurrent.actionType = 'SET_CURRENT';

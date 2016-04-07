@@ -9,7 +9,7 @@
     "cover:node": "istanbul --config=test/istanbul.conf.js cover node_modules/mocha/bin/_mocha",
     "test:chrome": "karma start test/karma.conf.js --browsers Chrome --single-run",
     "test:debug": "karma start test/karma.conf.js --browsers Firefox",
-    "build": "webpack --hide-modules --config tools/webpack.config.js && node tools/build",
+    "build": "rimraf output/build && webpack --hide-modules --config tools/webpack.config.js && node tools/build",
     "build:test": "webpack --hide-modules --config test/webpack.test.config.js",
     "test": "npm run lint && npm run cover:node && npm run build && npm run build:test && npm run test:chrome",
     "test:travis": "npm run lint && npm run cover:node && npm run build",

@@ -2,19 +2,19 @@
 
 var S = require('./state');
 var A = require('./action');
-var build = require('./build');
+var B = require('./build');
 
 describe('build', function () {
   describe('empty', function () {
     it('should return initial state', function () {
-      var state = build({});
+      var state = B.build({});
       state.should.deep.equal(S.initial());
     });
   });
 
   describe('entity', function () {
     it('should reduce the actions against the entity', function () {
-      var state = build({'food': [A.addTree]});
+      var state = B.build({'food': [A.addTree]});
       state.should.deep.equal({
         entities: {
           tree: {
@@ -27,7 +27,7 @@ describe('build', function () {
 
     describe('key', function () {
       it('should reduce the actions against the entity and key', function () {
-        var state = build({'food': [A.addTree, {'apple': [A.addTreeNode, {'Apple': [A.renameTreeNode]}, A.setCurrent]}]});
+        var state = B.build({'food': [A.addTree, {'apple': [A.addTreeNode, {'Apple': [A.renameTreeNode]}, B.setCurrent]}]});
         state.should.deep.equal({
           entities: {
             tree: {

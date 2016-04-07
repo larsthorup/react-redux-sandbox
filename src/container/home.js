@@ -9,12 +9,12 @@ var connect = ReactRedux.connect;
 
 function makeTreeProps (treeProps, entity, homeProps) {
   var key = {key: entity};
-  var setCurrentNode = {setCurrentNode: homeProps.setCurrent(entity)};
+  var setCurrentNode = {setCurrentNode: function (id) { homeProps.setCurrent(entity, id); }};
   return Object.assign({}, key, setCurrentNode, treeProps);
 }
 
-function makeButton (props, entity) {
-  return [d('button', {key: entity + 'Button', onClick: props.loadTree(entity)}, entity)];
+function makeButton (homeProps, entity) {
+  return [d('button', {key: entity + 'Button', onClick: function () { homeProps.loadTree(entity); }}, entity)];
 }
 
 function Home (props) {
@@ -32,7 +32,8 @@ function Home (props) {
   }
   var entities = Object.keys(buttons);
   for (var j = 0; j < entities.length; ++j) {
-    elems = makeButton(props, entities[j]).concat(elems);
+    var buttonElems = makeButton(props, entities[j]);
+    elems = buttonElems.concat(elems);
   }
   return d('div', null, elems);
 }
@@ -89,21 +90,15 @@ function mapStateToProps (state) {
   return homeProps;
 }
 
+// ToDo: use redux-thunk
 function mapDispatchToProps (dispatch) {
   return {
-    setCurrent: function (entity) {
-      var actionCreator = A.setCurrent(entity);
-      var dispatcher = function (id) {
-        var action = actionCreator(id);
-        dispatch(action);
-      };
-      return dispatcher;
+    setCurrent: function (entity, id) {
+      var action = A.setCurrent(entity, id);
+      dispatch(action);
     },
     loadTree: function (entity) {
-      var dispatcher = function () {
-        A.fetchingState({name: entity})(dispatch);
-      };
-      return dispatcher;
+      A.fetchingState({name: entity})(dispatch);
     }
   };
 }

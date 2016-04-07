@@ -1,4 +1,5 @@
 var R = require('ramda');
+var A = require('./action');
 var S = require('./state');
 var appReducer = require('./reducer');
 
@@ -50,4 +51,9 @@ function build (builders, state) {
   return applyActions(state, buildActions(flatten([], builders)));
 }
 
-module.exports = build;
+var B = {
+  build: build,
+  setCurrent: function (entry) { return function (id) { return A.setCurrent(entry, id); }; }
+};
+
+module.exports = B;
