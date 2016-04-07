@@ -2,7 +2,7 @@
 
 var S = require('./state');
 var A = require('./action');
-var B = require('./build');
+var B = require('./builder');
 
 describe('build', function () {
   describe('empty', function () {
@@ -14,7 +14,7 @@ describe('build', function () {
 
   describe('entity', function () {
     it('should reduce the actions against the entity', function () {
-      var state = B.build({'food': [A.addTree]});
+      var state = B.build({'food': [B.addTree]});
       state.should.deep.equal({
         entities: {
           tree: {
@@ -27,7 +27,7 @@ describe('build', function () {
 
     describe('key', function () {
       it('should reduce the actions against the entity and key', function () {
-        var state = B.build({'food': [A.addTree, {'apple': [A.addTreeNode, {'Apple': [A.renameTreeNode]}, B.setCurrent]}]});
+        var state = B.build({'food': [B.addTree, {'apple': [A.addTreeNode, {'Apple': [A.renameTreeNode]}, B.setCurrent]}]});
         state.should.deep.equal({
           entities: {
             tree: {

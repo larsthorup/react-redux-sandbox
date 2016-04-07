@@ -28,7 +28,7 @@ function setCurrent (state, action) {
 
 function addTree (state, action) {
   // ToDo: use R.pipe
-  return S.assoc(['entities', 'tree', action.entity], {}, S.assoc(['entities', action.entity], {}, state));
+  return S.assoc(['entities', 'tree', action.payload.entity], {}, S.assoc(['entities', action.payload.entity], {}, state));
 }
 
 function addTreeNode (state, action) {

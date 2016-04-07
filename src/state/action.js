@@ -29,14 +29,6 @@ function fetchingState (payload) {
   };
 }
 
-function addTree (entity) {
-  return {
-    type: addTree.actionType,
-    entity: entity
-  };
-}
-addTree.actionType = 'ADD_TREE';
-
 function addTreeNode (entity) {
   return function (id) {
     return {
@@ -63,9 +55,8 @@ function renameTreeNode (entity) {
 renameTreeNode.actionType = 'RENAME_TREE_NODE';
 
 // ToDo: modularize actions into state actions and tree actions
-var A = Object.assign(make('SET_STATE'), make('ADD_STATE'), make('REQUEST_STATE'), make('RECEIVE_STATE'), make('SET_CURRENT'), {
+var A = Object.assign(make('SET_STATE'), make('ADD_STATE'), make('REQUEST_STATE'), make('RECEIVE_STATE'), make('SET_CURRENT'), make('ADD_TREE'), {
   fetchingState: fetchingState,
-  addTree: addTree,
   addTreeNode: addTreeNode,
   renameTreeNode: renameTreeNode
 });
