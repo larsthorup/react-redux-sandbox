@@ -3,13 +3,13 @@ var S = require('./state');
 var A = require('./action');
 
 function setState (state, action) {
-  return action.state;
+  return action.payload.state;
 }
 
 function addState (state, action) {
   // ToDo: use R.pipe
-  var mergedEntities = S.assoc(['entities'], R.merge(state.entities, action.state.entities), state);
-  return S.assoc(['entities', 'tree'], R.merge(state.entities.tree, action.state.entities.tree), mergedEntities);
+  var mergedEntities = S.assoc(['entities'], R.merge(state.entities, action.payload.state.entities), state);
+  return S.assoc(['entities', 'tree'], R.merge(state.entities.tree, action.payload.state.entities.tree), mergedEntities);
 }
 
 function setCurrent (state, action) {

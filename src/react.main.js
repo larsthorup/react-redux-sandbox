@@ -22,7 +22,7 @@ function App (props) {
 
 function main () {
   var store = createStore(reducer);
-  store.dispatch(A.setState(S.initial()));
+  store.dispatch(A.setState({state: S.initial()}));
 
   var router = d(Router, {history: ReactRouter.hashHistory}, d(Route, {component: App}, route));
   var provider = d(Provider, {store: store}, router);

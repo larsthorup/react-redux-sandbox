@@ -9,7 +9,7 @@ describe('reducer', function () {
     it('should replace the state', function () {
       var previousState = build();
       var loadedState = build({'food': [A.addTree]});
-      var action = A.setState(loadedState);
+      var action = A.setState({state: loadedState});
       var state = appReducer(previousState, action);
       state.should.deep.equal(loadedState);
     });
@@ -19,7 +19,7 @@ describe('reducer', function () {
     it('should merge the state', function () {
       var previousState = build({'food': [A.addTree, {'apple': [A.addTreeNode]}]});
       var loadedState = build({'place': [A.addTree, {'europe': [A.addTreeNode]}]});
-      var action = A.addState(loadedState);
+      var action = A.addState({state: loadedState});
       var state = appReducer(previousState, action);
       state.entities.tree.food.should.deep.equal({});
       state.entities.tree.place.should.deep.equal({});

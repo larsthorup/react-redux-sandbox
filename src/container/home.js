@@ -103,7 +103,7 @@ function mapDispatchToProps (dispatch) {
     loadTree: function (entity) {
       var dispatcher = function () {
         // ToDo: use async fetchState action
-        var action = A.addState(demo[entity]);
+        var action = A.addState({state: demo[entity]});
         dispatch(action);
       };
       return dispatcher;

@@ -1,20 +1,19 @@
+var R = require('ramda');
+var camelCase = require('camelcase');
+
 // ToDo: make actions FSA compliant: https://github.com/acdlite/flux-standard-action
 
-function setState (state) {
-  return {
-    type: setState.actionType,
-    state: state
+function make (type) {
+  var actionName = camelCase(type.toLowerCase());
+  var actionCreator = function (payload) {
+    return {
+      type: type,
+      payload: payload
+    };
   };
+  actionCreator.actionType = type;
+  return R.assoc(actionName, actionCreator, {});
 }
-setState.actionType = 'SET_STATE';
-
-function addState (state) {
-  return {
-    type: addState.actionType,
-    state: state
-  };
-}
-addState.actionType = 'ADD_STATE';
 
 function addTree (entity) {
   return {
@@ -60,11 +59,9 @@ function setCurrent (entity) {
 }
 setCurrent.actionType = 'SET_CURRENT';
 
-module.exports = {
-  setState: setState,
-  addState: addState,
+module.exports = Object.assign(make('SET_STATE'), make('ADD_STATE'), {
   addTree: addTree,
   addTreeNode: addTreeNode,
   renameTreeNode: renameTreeNode,
   setCurrent: setCurrent
-};
+});
