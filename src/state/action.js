@@ -29,24 +29,9 @@ function fetchingState (payload) {
   };
 }
 
-function renameTreeNode (entity) {
-  return function (id) {
-    return function (name) {
-      return {
-        type: renameTreeNode.actionType,
-        entity: entity,
-        id: id,
-        name: name
-      };
-    };
-  };
-}
-renameTreeNode.actionType = 'RENAME_TREE_NODE';
-
 // ToDo: modularize actions into state actions and tree actions
-var A = Object.assign(make('SET_STATE'), make('ADD_STATE'), make('REQUEST_STATE'), make('RECEIVE_STATE'), make('SET_CURRENT'), make('ADD_TREE'), make('ADD_TREE_NODE'), {
-  fetchingState: fetchingState,
-  renameTreeNode: renameTreeNode
+var A = Object.assign(make('SET_STATE'), make('ADD_STATE'), make('REQUEST_STATE'), make('RECEIVE_STATE'), make('SET_CURRENT'), make('ADD_TREE'), make('ADD_TREE_NODE'), make('RENAME_TREE_NODE'), {
+  fetchingState: fetchingState
 });
 
 module.exports = A;

@@ -36,7 +36,7 @@ function addTreeNode (state, action) {
 }
 
 function renameTreeNode (state, action) {
-  return S.assoc(['entities', action.entity, action.id, 'name'], action.name, state);
+  return S.assoc(['entities', action.payload.entity, action.payload.id, 'name'], action.payload.name, state);
 }
 
 // ToDo: avoid switch statement

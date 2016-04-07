@@ -53,9 +53,11 @@ function build (builders, state) {
 
 var B = {
   build: build,
+  // ToDo: use R.curry
   setCurrent: function (entity) { return function (id) { return A.setCurrent({entity: entity, id: id}); }; },
   addTree: function (entity) { return A.addTree({entity: entity}); },
-  addTreeNode: function (entity) { return function (id) { return A.addTreeNode({entity: entity, id: id}); }; }
+  addTreeNode: function (entity) { return function (id) { return A.addTreeNode({entity: entity, id: id}); }; },
+  renameTreeNode: function (entity) { return function (id) { return function (name) { return A.renameTreeNode({entity: entity, id: id, name: name}); }; }; }
 };
 
 module.exports = B;

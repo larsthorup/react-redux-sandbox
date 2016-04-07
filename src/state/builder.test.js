@@ -1,7 +1,6 @@
 /* eslint-env mocha */
 
 var S = require('./state');
-var A = require('./action');
 var B = require('./builder');
 
 describe('build', function () {
@@ -27,7 +26,7 @@ describe('build', function () {
 
     describe('key', function () {
       it('should reduce the actions against the entity and key', function () {
-        var state = B.build({'food': [B.addTree, {'apple': [B.addTreeNode, {'Apple': [A.renameTreeNode]}, B.setCurrent]}]});
+        var state = B.build({'food': [B.addTree, {'apple': [B.addTreeNode, {'Apple': [B.renameTreeNode]}, B.setCurrent]}]});
         state.should.deep.equal({
           entities: {
             tree: {
