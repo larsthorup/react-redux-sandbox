@@ -4,6 +4,13 @@ var sinon = require('sinon');
 var A = require('./action');
 
 describe('action', function () {
+  describe('addState', function () {
+    it('should create the action', function () {
+      var action = A.addState({state: 'someState'});
+      action.should.deep.equal({type: 'ADD_STATE', payload: {state: 'someState'}});
+    });
+  });
+
   describe('fetchingState', function () {
     beforeEach(function () {
       // this.sinon = sinon.sandbox.create();
