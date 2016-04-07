@@ -3,7 +3,6 @@ var jsnox = require('jsnox');
 var ReactRedux = require('react-redux');
 var A = require('../state/action');
 var Tree = require('../component/tree');
-var demo = require('../state/demo');
 
 var d = jsnox(React);
 var connect = ReactRedux.connect;
@@ -102,9 +101,7 @@ function mapDispatchToProps (dispatch) {
     },
     loadTree: function (entity) {
       var dispatcher = function () {
-        // ToDo: use async fetchState action
-        var action = A.addState({state: demo[entity]});
-        dispatch(action);
+        A.fetchingState({name: entity})(dispatch);
       };
       return dispatcher;
     }

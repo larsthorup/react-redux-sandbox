@@ -1,3 +1,4 @@
+/* global fetch */
 var R = require('ramda');
 var camelCase = require('camelcase');
 
@@ -13,6 +14,19 @@ function make (type) {
   };
   actionCreator.actionType = type;
   return R.assoc(actionName, actionCreator, {});
+}
+
+function fetchingState (payload) {
+  return function (dispatch) {
+    dispatch(A.requestState(payload));
+    var url = 'data/' + payload.name + '.json';
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      dispatch(A.receiveState(R.assoc('json', json, payload)));
+    });
+    // ToDo: error handling
+  };
 }
 
 function addTree (entity) {
@@ -59,9 +73,13 @@ function setCurrent (entity) {
 }
 setCurrent.actionType = 'SET_CURRENT';
 
-module.exports = Object.assign(make('SET_STATE'), make('ADD_STATE'), {
+// ToDo: modularize actions into state actions and tree actions
+var A = Object.assign(make('SET_STATE'), make('ADD_STATE'), make('REQUEST_STATE'), make('RECEIVE_STATE'), {
+  fetchingState: fetchingState,
   addTree: addTree,
   addTreeNode: addTreeNode,
   renameTreeNode: renameTreeNode,
   setCurrent: setCurrent
 });
+
+module.exports = A;

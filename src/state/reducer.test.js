@@ -28,6 +28,28 @@ describe('reducer', function () {
     });
   });
 
+  describe('requestState', function () {
+    it('should do nothing, for now', function () {
+      var previousState = build();
+      var action = A.requestState({name: 'food'});
+      var state = appReducer(previousState, action);
+      state.should.equal(previousState);
+    });
+  });
+
+  describe('receiveState', function () {
+    it('should merge the state', function () {
+      var previousState = build({'food': [A.addTree, {'apple': [A.addTreeNode]}]});
+      var loadedState = build({'place': [A.addTree, {'europe': [A.addTreeNode]}]});
+      var action = A.receiveState({json: loadedState});
+      var state = appReducer(previousState, action);
+      state.entities.tree.food.should.deep.equal({});
+      state.entities.tree.place.should.deep.equal({});
+      state.entities.food.apple.name.should.deep.equal('apple');
+      state.entities.place.europe.name.should.deep.equal('europe');
+    });
+  });
+
   describe('setCurrent', function () {
     it('should move current flag to specified node', function () {
       var previousState = build({'food': [A.addTree, {'apple': [A.addTreeNode, A.setCurrent], 'orange': [A.addTreeNode]}]});

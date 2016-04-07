@@ -1,0 +1,16 @@
+{
+  "entities": {
+    "tree": {
+      "food": {"roots": ["vegetable", "meat"], "current": "vegetable", "isFetching": false}
+    },
+    "food": {
+      "vegetable": {"name": "Vegetable", "subtypes": ["fruit"]},
+      "fruit": {"name": "Fruit", "subtypes": ["apple", "orange"]},
+      "apple": {"name": "Apple", "subtypes": []},
+      "orange": {"name": "Orange", "subtypes": []},
+      "meat": {"name": "Meat", "subtypes": ["beef", "lamb"]},
+      "beef": {"name": "Beef", "subtypes": []},
+      "lamb": {"name": "Lamb", "subtypes": []}
+    }
+  }
+}

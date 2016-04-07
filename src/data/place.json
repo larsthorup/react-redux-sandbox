@@ -1,0 +1,13 @@
+{
+  "entities": {
+    "tree": {
+      "place": {"roots": ["earth", "mars"], "current": "africa", "isFetching": false}
+    },
+    "place": {
+      "earth": {"name": "Earth", "places": ["europe", "africa"]},
+      "europe": {"name": "Europe", "places": []},
+      "africa": {"name": "Africa", "places": []},
+      "mars": {"name": "Mars", "places": []}
+    }
+  }
+}

@@ -10,5 +10,11 @@ describe('state', function () {
       state.entities.tree.food.current.should.equal('orange');
       state.entities.tree.place.should.equal(oldState.entities.tree.place); // Note: same object
     });
+
+    it('should create the property at path if necessary', function () {
+      var oldAction = {payload: {json: 'someJson'}};
+      var action = S.assoc(['payload', 'state'], oldAction.payload.json, oldAction);
+      action.payload.state.should.equal('someJson');
+    });
   });
 });

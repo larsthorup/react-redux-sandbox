@@ -12,6 +12,16 @@ function addState (state, action) {
   return S.assoc(['entities', 'tree'], R.merge(state.entities.tree, action.payload.state.entities.tree), mergedEntities);
 }
 
+function requestState (state, action) {
+  // ToDo: mark as fetching
+  return state;
+}
+
+function receiveState (state, action) {
+  var addStateAction = S.assoc(['payload', 'state'], action.payload.json, action);
+  return addState(state, addStateAction);
+}
+
 function setCurrent (state, action) {
   return S.assoc(['entities', 'tree', action.entity, 'current'], action.id, state);
 }
@@ -36,6 +46,10 @@ function appReducer (state, action) {
       return setState(state, action);
     case A.addState.actionType:
       return addState(state, action);
+    case A.requestState.actionType:
+      return requestState(state, action);
+    case A.receiveState.actionType:
+      return receiveState(state, action);
     case A.addTree.actionType:
       return addTree(state, action);
     case A.addTreeNode.actionType:

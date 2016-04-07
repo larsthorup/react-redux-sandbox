@@ -5,6 +5,7 @@ var jsnox = require('jsnox');
 var sinon = require('sinon');
 var sd = require('skin-deep');
 var Home = require('./home');
+var A = require('../state/action');
 
 var d = jsnox(React);
 
@@ -98,6 +99,16 @@ describe('Home', function () {
   });
 
   describe('mapDispatchToProps', function () {
+    beforeEach(function () {
+      this.sinon = sinon.sandbox.create();
+      this.fetchingStateDispatcher = sinon.spy();
+      this.sinon.stub(A, 'fetchingState').returns(this.fetchingStateDispatcher);
+    });
+
+    afterEach(function () {
+      this.sinon.restore();
+    });
+
     it('should support parameterized actions creators', function () {
       var dispatch = sinon.spy();
       var props = Home.mapDispatchToProps(dispatch);
@@ -107,11 +118,12 @@ describe('Home', function () {
     });
 
     it('should support normal actions creators', function () {
-      var dispatch = sinon.spy();
+      var dispatch = function () {};
       var props = Home.mapDispatchToProps(dispatch);
       var loadTree = props.loadTree('food');
       loadTree();
-      dispatch.lastCall.args[0].type.should.equal('ADD_STATE');
+      A.fetchingState.lastCall.args[0].should.deep.equal({name: 'food'});
+      this.fetchingStateDispatcher.lastCall.args[0].should.equal(dispatch);
     });
   });
 });
