@@ -53,7 +53,7 @@ function build (builders, state) {
 
 var B = {
   build: build,
-  setCurrent: function (entry) { return function (id) { return A.setCurrent(entry, id); }; }
+  setCurrent: function (entity) { return function (id) { return A.setCurrent({entity: entity, id: id}); }; }
 };
 
 module.exports = B;

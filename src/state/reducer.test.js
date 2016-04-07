@@ -53,7 +53,7 @@ describe('reducer', function () {
   describe('setCurrent', function () {
     it('should move current flag to specified node', function () {
       var previousState = B.build({'food': [A.addTree, {'apple': [A.addTreeNode, B.setCurrent], 'orange': [A.addTreeNode]}]});
-      var action = A.setCurrent('food', 'orange');
+      var action = A.setCurrent({entity: 'food', id: 'orange'});
       var state = appReducer(previousState, action);
       state.entities.tree.food.current.should.equal('orange');
       state.entities.food.should.equal(previousState.entities.food); // Note: same object

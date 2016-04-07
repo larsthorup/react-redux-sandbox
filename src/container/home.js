@@ -9,7 +9,7 @@ var connect = ReactRedux.connect;
 
 function makeTreeProps (treeProps, entity, homeProps) {
   var key = {key: entity};
-  var setCurrentNode = {setCurrentNode: function (id) { homeProps.setCurrent(entity, id); }};
+  var setCurrentNode = {setCurrentNode: function (id) { homeProps.setCurrent({entity: entity, id: id}); }};
   return Object.assign({}, key, setCurrentNode, treeProps);
 }
 
@@ -93,8 +93,8 @@ function mapStateToProps (state) {
 // ToDo: use redux-thunk
 function mapDispatchToProps (dispatch) {
   return {
-    setCurrent: function (entity, id) {
-      var action = A.setCurrent(entity, id);
+    setCurrent: function (payload) {
+      var action = A.setCurrent(payload);
       dispatch(action);
     },
     loadTree: function (entity) {

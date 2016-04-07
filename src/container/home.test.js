@@ -21,7 +21,7 @@ describe('Home', function () {
       trees.length.should.equal(2);
       trees[0].props.nodes.should.equal(model.entities[0].tree.nodes);
       trees[0].props.setCurrentNode('orange');
-      setCurrent.lastCall.args.should.deep.equal(['food', 'orange']);
+      setCurrent.lastCall.args.should.deep.equal([{entity: 'food', id: 'orange'}]);
       trees[1].props.nodes.should.equal(model.entities[1].tree.nodes);
     });
 
@@ -119,8 +119,8 @@ describe('Home', function () {
     it('should support parameterized actions creators', function () {
       var dispatch = sinon.spy();
       var props = Home.mapDispatchToProps(dispatch);
-      props.setCurrent('food', 'orange');
-      dispatch.lastCall.args.should.deep.equal([{type: 'SET_CURRENT', entity: 'food', id: 'orange'}]);
+      props.setCurrent({entity: 'food', id: 'orange'});
+      dispatch.lastCall.args.should.deep.equal([{type: 'SET_CURRENT', payload: {entity: 'food', id: 'orange'}}]);
     });
 
     it('should support normal actions creators', function () {

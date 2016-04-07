@@ -62,22 +62,12 @@ function renameTreeNode (entity) {
 }
 renameTreeNode.actionType = 'RENAME_TREE_NODE';
 
-function setCurrent (entity, id) {
-  return {
-    type: setCurrent.actionType,
-    entity: entity,
-    id: id
-  };
-}
-setCurrent.actionType = 'SET_CURRENT';
-
 // ToDo: modularize actions into state actions and tree actions
-var A = Object.assign(make('SET_STATE'), make('ADD_STATE'), make('REQUEST_STATE'), make('RECEIVE_STATE'), {
+var A = Object.assign(make('SET_STATE'), make('ADD_STATE'), make('REQUEST_STATE'), make('RECEIVE_STATE'), make('SET_CURRENT'), {
   fetchingState: fetchingState,
   addTree: addTree,
   addTreeNode: addTreeNode,
-  renameTreeNode: renameTreeNode,
-  setCurrent: setCurrent
+  renameTreeNode: renameTreeNode
 });
 
 module.exports = A;

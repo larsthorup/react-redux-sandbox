@@ -23,7 +23,7 @@ function receiveState (state, action) {
 }
 
 function setCurrent (state, action) {
-  return S.assoc(['entities', 'tree', action.entity, 'current'], action.id, state);
+  return S.assoc(['entities', 'tree', action.payload.entity, 'current'], action.payload.id, state);
 }
 
 function addTree (state, action) {
