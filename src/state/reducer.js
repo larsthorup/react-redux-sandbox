@@ -32,7 +32,7 @@ function addTree (state, action) {
 }
 
 function addTreeNode (state, action) {
-  return S.assoc(['entities', action.entity, action.id], {name: action.id, subtypes: []}, state);
+  return S.assoc(['entities', action.payload.entity, action.payload.id], {name: action.payload.id, subtypes: []}, state);
 }
 
 function renameTreeNode (state, action) {

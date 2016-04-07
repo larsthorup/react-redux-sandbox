@@ -27,7 +27,7 @@ describe('build', function () {
 
     describe('key', function () {
       it('should reduce the actions against the entity and key', function () {
-        var state = B.build({'food': [B.addTree, {'apple': [A.addTreeNode, {'Apple': [A.renameTreeNode]}, B.setCurrent]}]});
+        var state = B.build({'food': [B.addTree, {'apple': [B.addTreeNode, {'Apple': [A.renameTreeNode]}, B.setCurrent]}]});
         state.should.deep.equal({
           entities: {
             tree: {

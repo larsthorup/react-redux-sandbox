@@ -17,8 +17,8 @@ describe('reducer', function () {
 
   describe('addState', function () {
     it('should merge the state', function () {
-      var previousState = B.build({'food': [B.addTree, {'apple': [A.addTreeNode]}]});
-      var loadedState = B.build({'place': [B.addTree, {'europe': [A.addTreeNode]}]});
+      var previousState = B.build({'food': [B.addTree, {'apple': [B.addTreeNode]}]});
+      var loadedState = B.build({'place': [B.addTree, {'europe': [B.addTreeNode]}]});
       var action = A.addState({state: loadedState});
       var state = appReducer(previousState, action);
       state.entities.tree.food.should.deep.equal({});
@@ -39,8 +39,8 @@ describe('reducer', function () {
 
   describe('receiveState', function () {
     it('should merge the state', function () {
-      var previousState = B.build({'food': [B.addTree, {'apple': [A.addTreeNode]}]});
-      var loadedState = B.build({'place': [B.addTree, {'europe': [A.addTreeNode]}]});
+      var previousState = B.build({'food': [B.addTree, {'apple': [B.addTreeNode]}]});
+      var loadedState = B.build({'place': [B.addTree, {'europe': [B.addTreeNode]}]});
       var action = A.receiveState({json: loadedState});
       var state = appReducer(previousState, action);
       state.entities.tree.food.should.deep.equal({});
@@ -52,7 +52,7 @@ describe('reducer', function () {
 
   describe('setCurrent', function () {
     it('should move current flag to specified node', function () {
-      var previousState = B.build({'food': [B.addTree, {'apple': [A.addTreeNode, B.setCurrent], 'orange': [A.addTreeNode]}]});
+      var previousState = B.build({'food': [B.addTree, {'apple': [B.addTreeNode, B.setCurrent], 'orange': [B.addTreeNode]}]});
       var action = A.setCurrent({entity: 'food', id: 'orange'});
       var state = appReducer(previousState, action);
       state.entities.tree.food.current.should.equal('orange');
