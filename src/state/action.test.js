@@ -1,26 +1,19 @@
 /* eslint-env mocha */
 
 var sinon = require('sinon');
+var fetchMock = require('fetch-mock');
 var A = require('./action');
 
 describe('action', function () {
   describe('fetchingState', function () {
     beforeEach(function () {
-      // this.sinon = sinon.sandbox.create();
-      // this.sinon.stub(global, 'fetch').andReturn
-      // ToDo: use fetch-mock
-      global.fetch = function () {
-        return Promise.resolve({
-          json: function () {
-            return Promise.resolve({valid: 'json'});
-          }
-        });
-      };
+      fetchMock.mock('data/food.json', {valid: 'json'});
     });
+
     afterEach(function () {
-      // this.sinon.restore();
-      delete global.fetch;
+      fetchMock.restore();
     });
+
     it('should dispatch requestState and receiveState events', function () {
       var dispatch = sinon.spy();
       return A.fetchingState({name: 'food'})(dispatch).then(function () {

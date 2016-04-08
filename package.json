@@ -26,6 +26,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.6",
+    "fetch-mock": "^4.3.1",
     "fs-extra": "^0.26.5",
     "html-webpack-plugin": "^2.15.0",
     "istanbul": "^0.4.2",
