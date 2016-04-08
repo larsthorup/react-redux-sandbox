@@ -2,10 +2,6 @@ var R = require('ramda');
 var S = require('./state');
 var A = require('./action');
 
-function setState (state, action) {
-  return action.payload.state;
-}
-
 function addState (state, action) {
   // ToDo: use R.pipe
   var mergedEntities = S.assoc(['entities'], R.merge(state.entities, action.payload.state.entities), state);
@@ -39,11 +35,9 @@ function renameTreeNode (state, action) {
   return S.assoc(['entities', action.payload.entity, action.payload.id, 'name'], action.payload.name, state);
 }
 
-// ToDo: avoid switch statement
-function appReducer (state, action) {
+function reducer (state, action) {
+  state = state || S.initial();
   switch (action.type) {
-    case A.setState.actionType:
-      return setState(state, action);
     case A.addState.actionType:
       return addState(state, action);
     case A.requestState.actionType:
@@ -63,4 +57,4 @@ function appReducer (state, action) {
   }
 }
 
-module.exports = appReducer;
+module.exports = reducer;

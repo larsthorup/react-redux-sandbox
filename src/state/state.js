@@ -1,3 +1,11 @@
 var treeState = require('./tree/state');
 
-module.exports = treeState;
+function initial () {
+  return {
+    tree: treeState.initial()
+  };
+}
+
+module.exports = {
+  initial: initial
+};

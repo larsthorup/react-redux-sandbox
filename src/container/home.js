@@ -79,9 +79,9 @@ var mapNode = {
 function mapStateToProps (state) {
   // ToDo: use memoization to minimize re-rendering
   var homeProps = {
-    entities: Object.keys(state.entities.tree).map(function (entity) {
+    entities: Object.keys(state.tree.entities.tree).map(function (entity) {
       return mapStateToTreeProps({
-        state: state,
+        state: state.tree,
         entity: entity,
         childProp: childProp[entity],
         mapNode: mapNode[entity]
