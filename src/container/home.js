@@ -14,7 +14,7 @@ function makeTreeProps (treeProps, entity, homeProps) {
 }
 
 function makeButton (homeProps, entity) {
-  return [d('button', {key: entity + 'Button', onClick: function () { homeProps.loadTree(entity); }}, entity)];
+  return [d('button', {key: entity + 'Button', onClick: function () { homeProps.loadTree({name: entity}); }}, entity)];
 }
 
 function Home (props) {
@@ -97,8 +97,8 @@ function mapDispatchToProps (dispatch) {
       var action = A.setCurrent(payload);
       dispatch(action);
     },
-    loadTree: function (entity) {
-      A.fetchingState({name: entity})(dispatch);
+    loadTree: function (payload) {
+      A.fetchingState(payload)(dispatch);
     }
   };
 }

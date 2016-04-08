@@ -36,7 +36,7 @@ describe('Home', function () {
       var buttons = dom.everySubTree('button');
       buttons.length.should.equal(1);
       buttons[0].props.onClick();
-      loadTree.lastCall.args.should.deep.equal(['place']);
+      loadTree.lastCall.args.should.deep.equal([{name: 'place'}]);
     });
   });
 
@@ -126,7 +126,7 @@ describe('Home', function () {
     it('should support normal actions creators', function () {
       var dispatch = function () {};
       var props = Home.mapDispatchToProps(dispatch);
-      props.loadTree('food');
+      props.loadTree({name: 'food'});
       A.fetchingState.lastCall.args[0].should.deep.equal({name: 'food'});
       this.fetchingStateDispatcher.lastCall.args[0].should.equal(dispatch);
     });
