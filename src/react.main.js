@@ -6,9 +6,9 @@ var jsnox = require('jsnox');
 var Redux = require('redux');
 var thunk = require('redux-thunk').default;
 var ReactRedux = require('react-redux');
-var S = require('./state/state');
-var A = require('./state/action');
-var reducer = require('./state/reducer');
+var S = require('./state/tree/state');
+var A = require('./state/tree/action');
+var reducer = require('./state/tree/reducer');
 var route = require('./route');
 
 var d = jsnox(React);

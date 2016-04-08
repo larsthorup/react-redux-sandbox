@@ -1,7 +1,7 @@
 /* global fetch */
 
 var R = require('ramda');
-var actionHelper = require('../helper/actionHelper');
+var actionHelper = require('../../helper/actionHelper');
 
 function fetchingState (payload) {
   return function (dispatch) {

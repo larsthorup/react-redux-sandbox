@@ -1,7 +1,7 @@
 var React = require('react');
 var jsnox = require('jsnox');
 var ReactRedux = require('react-redux');
-var A = require('../state/action');
+var A = require('../state/tree/action');
 var Tree = require('../component/tree');
 
 var d = jsnox(React);
