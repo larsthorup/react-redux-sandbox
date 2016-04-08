@@ -14,7 +14,8 @@ function makeTreeProps (treeProps, entity, homeProps) {
 }
 
 function makeButton (homeProps, entity) {
-  return [d('button', {key: entity + 'Button', onClick: function () { homeProps.loadTree({name: entity}); }}, entity)];
+  var onClick = function () { homeProps.fetchingState({name: entity}); }; // Note: async action requires redux-thunk middleware
+  return [d('button', {key: entity + 'Button', onClick: onClick}, entity)];
 }
 
 function Home (props) {
@@ -90,24 +91,10 @@ function mapStateToProps (state) {
   return homeProps;
 }
 
-// ToDo: use redux-thunk
-function mapDispatchToProps (dispatch) {
-  return {
-    setCurrent: function (payload) {
-      var action = A.setCurrent(payload);
-      dispatch(action);
-    },
-    loadTree: function (payload) {
-      A.fetchingState(payload)(dispatch);
-    }
-  };
-}
-
-var Container = connect(mapStateToProps, mapDispatchToProps)(Home);
+var Container = connect(mapStateToProps, A)(Home);
 
 module.exports = {
   View: Home,
   Container: Container,
-  mapStateToProps: mapStateToProps,
-  mapDispatchToProps: mapDispatchToProps
+  mapStateToProps: mapStateToProps
 };

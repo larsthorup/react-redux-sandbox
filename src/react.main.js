@@ -4,6 +4,7 @@ var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
 var jsnox = require('jsnox');
 var Redux = require('redux');
+var thunk = require('redux-thunk').default;
 var ReactRedux = require('react-redux');
 var S = require('./state/state');
 var A = require('./state/action');
@@ -14,6 +15,7 @@ var d = jsnox(React);
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var createStore = Redux.createStore;
+var applyMiddleware = Redux.applyMiddleware;
 var Provider = ReactRedux.Provider;
 
 function App (props) {
@@ -21,7 +23,7 @@ function App (props) {
 }
 
 function main () {
-  var store = createStore(reducer);
+  var store = createStore(reducer, applyMiddleware(thunk));
   store.dispatch(A.setState({state: S.initial()}));
 
   var router = d(Router, {history: ReactRouter.hashHistory}, d(Route, {component: App}, route));

@@ -5,7 +5,6 @@ var jsnox = require('jsnox');
 var sinon = require('sinon');
 var sd = require('skin-deep');
 var Home = require('./home');
-var A = require('../state/action');
 
 var d = jsnox(React);
 
@@ -26,8 +25,8 @@ describe('Home', function () {
     });
 
     it('should create buttons for missing trees', function () {
-      var loadTree = sinon.spy();
-      var model = {entities: [{entity: 'food', tree: {nodes: []}}], setCurrent: function () {}, loadTree: loadTree};
+      var fetchingState = sinon.spy();
+      var model = {entities: [{entity: 'food', tree: {nodes: []}}], setCurrent: function () {}, fetchingState: fetchingState};
       var view = d(Home.View, model);
       var dom = sd.shallowRender(view);
       var trees = dom.everySubTree('Tree');
@@ -36,7 +35,7 @@ describe('Home', function () {
       var buttons = dom.everySubTree('button');
       buttons.length.should.equal(1);
       buttons[0].props.onClick();
-      loadTree.lastCall.args.should.deep.equal([{name: 'place'}]);
+      fetchingState.lastCall.args.should.deep.equal([{name: 'place'}]);
     });
   });
 
@@ -103,32 +102,5 @@ describe('Home', function () {
     });
 
     it('should verify memoization');
-  });
-
-  describe('mapDispatchToProps', function () {
-    beforeEach(function () {
-      this.sinon = sinon.sandbox.create();
-      this.fetchingStateDispatcher = sinon.spy();
-      this.sinon.stub(A, 'fetchingState').returns(this.fetchingStateDispatcher);
-    });
-
-    afterEach(function () {
-      this.sinon.restore();
-    });
-
-    it('should support parameterized actions creators', function () {
-      var dispatch = sinon.spy();
-      var props = Home.mapDispatchToProps(dispatch);
-      props.setCurrent({entity: 'food', id: 'orange'});
-      dispatch.lastCall.args.should.deep.equal([{type: 'SET_CURRENT', payload: {entity: 'food', id: 'orange'}}]);
-    });
-
-    it('should support normal actions creators', function () {
-      var dispatch = function () {};
-      var props = Home.mapDispatchToProps(dispatch);
-      props.loadTree({name: 'food'});
-      A.fetchingState.lastCall.args[0].should.deep.equal({name: 'food'});
-      this.fetchingStateDispatcher.lastCall.args[0].should.equal(dispatch);
-    });
   });
 });
