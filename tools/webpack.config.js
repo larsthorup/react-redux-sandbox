@@ -8,7 +8,7 @@ module.exports = {
     path: './output/build',
     filename: '[name]-[hash].js'
   },
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html'

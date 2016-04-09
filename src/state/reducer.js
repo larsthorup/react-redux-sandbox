@@ -1,5 +1,7 @@
 var redux = require('redux');
 var A = require('./action');
+// ToDo: use requireAll
+var authReducer = require('./auth/reducer');
 var treeReducer = require('./tree/reducer');
 
 function setState (state, action) {
@@ -7,6 +9,7 @@ function setState (state, action) {
 }
 
 var subReducer = redux.combineReducers({
+  auth: authReducer,
   tree: treeReducer
 });
 

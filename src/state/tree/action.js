@@ -12,11 +12,10 @@ function fetchingState (payload) {
     }).then(function (json) {
       dispatch(A.receiveState(R.assoc('json', json, payload)));
     });
-    // ToDo: error handling
+    // ToDo: .catch(err => dispatch(A.serverError(err))
   };
 }
 
-// ToDo: modularize actions into state actions and tree actions
 var A = actionHelper.makeActionCreators([
   'SET_STATE',
   'ADD_STATE',

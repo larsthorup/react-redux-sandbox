@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var fetchMock = require('fetch-mock');
 var A = require('./action');
 
-describe('action', function () {
+describe('tree/action', function () {
   describe('fetchingState', function () {
     beforeEach(function () {
       fetchMock.mock('data/food.json', {valid: 'json'});

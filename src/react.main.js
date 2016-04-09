@@ -25,8 +25,7 @@ function App (props) {
 function main () {
   var store = createStore(reducer, applyMiddleware(thunk));
   store.dispatch(A.setState({state: S.initial()}));
-
-  var router = d(Router, {history: ReactRouter.hashHistory}, d(Route, {component: App}, route));
+  var router = d(Router, {history: route.history}, d(Route, {component: App}, route.appRoutes));
   var provider = d(Provider, {store: store}, router);
   var appElement = document.getElementById('app');
   ReactDOM.render(provider, appElement);

@@ -14,4 +14,7 @@ describe('reducer', function () {
       state.should.deep.equal(loadedState);
     });
   });
+  describe('sub reducers', function () {
+    it('should propagate to sub reducers');
+  });
 });
