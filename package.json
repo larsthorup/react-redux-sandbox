@@ -4,7 +4,7 @@
   "description": "sandbox for react and redux",
   "scripts": {
     "clean": "rimraf output",
-    "lint": "semistandard --verbose",
+    "lint": "eslint .",
     "test:node": "mocha",
     "cover:node": "istanbul --config=test/istanbul.conf.js cover node_modules/mocha/bin/_mocha",
     "test:chrome": "karma start test/karma.conf.js --browsers Chrome --single-run",

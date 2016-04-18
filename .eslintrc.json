@@ -1,0 +1,9 @@
+{
+  "extends": "semistandard",
+
+  "rules": {
+    "max-nested-callbacks": [2, 4],
+    "max-params": [2, 3],
+    "max-statements": [2, 12]
+  }
+}
