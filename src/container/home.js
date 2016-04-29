@@ -1,10 +1,9 @@
 var React = require('react');
-var jsnox = require('jsnox');
 var ReactRedux = require('react-redux');
 var A = require('../state/action');
 var Tree = require('../component/tree');
 
-var d = jsnox(React);
+var h = React.createElement;
 var connect = ReactRedux.connect;
 
 function makeTreeProps (treeProps, entity, homeProps) {
@@ -15,7 +14,7 @@ function makeTreeProps (treeProps, entity, homeProps) {
 
 function makeButton (homeProps, entity) {
   var onClick = function () { homeProps.fetchingState({name: entity}); }; // Note: async action requires redux-thunk middleware
-  return [d('button', {key: entity + 'Button', onClick: onClick}, entity)];
+  return [h('button', {key: entity + 'Button', onClick: onClick}, entity)];
 }
 
 function Home (props) {
@@ -27,8 +26,8 @@ function Home (props) {
     var entity = entityProps.entity;
     delete buttons[entity];
     elems = elems.concat([
-      d('p', {key: entity + 'Header'}, entity),
-      d(Tree, makeTreeProps(entityProps.tree, entity, props))
+      h('p', {key: entity + 'Header'}, entity),
+      h(Tree, makeTreeProps(entityProps.tree, entity, props))
     ]);
   }
   var entities = Object.keys(buttons);
@@ -36,7 +35,7 @@ function Home (props) {
     var buttonElems = makeButton(props, entities[j]);
     elems = buttonElems.concat(elems);
   }
-  return d('div', null, elems);
+  return h('div', null, elems);
 }
 
 Home.propTypes = {

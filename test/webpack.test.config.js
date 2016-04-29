@@ -11,6 +11,6 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   plugins: [
-    new webpack.IgnorePlugin(/ReactContext/) // Note: see https://github.com/glenjamin/skin-deep
+    new webpack.IgnorePlugin(/ReactContext|react\/addons/) // Note: see https://github.com/glenjamin/skin-deep
   ]
 };

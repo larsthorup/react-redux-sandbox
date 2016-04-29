@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -10,6 +11,7 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
+    new webpack.IgnorePlugin(/ReactContext|react\/addons/),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })

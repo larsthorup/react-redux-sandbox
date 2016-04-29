@@ -4,17 +4,17 @@ var chai = require('chai');
 var should = chai.should();
 var sinon = require('sinon');
 var React = require('react');
-var jsnox = require('jsnox');
 var sd = require('skin-deep');
 var TreeNode = require('./treeNode');
-var d = jsnox(React);
+
+var h = React.createElement;
 
 describe('TreeNode', function () {
   describe('render', function () {
     describe('not current', function () {
       it('should create a span with the node text', function () {
         var model = {id: 'node', text: 'aNodeText'};
-        var view = d(TreeNode, model);
+        var view = h(TreeNode, model);
         var span = sd.shallowRender(view).subTree('span');
         span.text().should.equal('aNodeText');
         should.not.exist(span.props.className);
@@ -24,7 +24,7 @@ describe('TreeNode', function () {
     describe('current', function () {
       it('should mark the span current', function () {
         var model = {current: true, id: 'node', text: 'aNodeText'};
-        var view = d(TreeNode, model);
+        var view = h(TreeNode, model);
         var span = sd.shallowRender(view).subTree('span');
         span.props.className.should.equal('current');
       });
@@ -33,7 +33,7 @@ describe('TreeNode', function () {
   describe('setCurrentNode', function () {
     it('should invoke props callback', function () {
       var model = {id: 'node', text: 'aNodeText', setCurrentNode: sinon.spy()};
-      var view = d(TreeNode, model);
+      var view = h(TreeNode, model);
       var span = sd.shallowRender(view).subTree('span');
       span.props.onClick();
       model.setCurrentNode.calledWith().should.equal(true);

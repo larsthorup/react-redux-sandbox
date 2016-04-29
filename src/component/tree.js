@@ -1,11 +1,10 @@
 var React = require('react');
-var jsnox = require('jsnox');
 var TreeNodeList = require('./treeNodeList');
 
-var d = jsnox(React);
+var h = React.createElement;
 
 function Tree (props) {
-  return d('div', null, d(TreeNodeList, props));
+  return h('div', null, h(TreeNodeList, props));
 }
 
 Tree.propTypes = {

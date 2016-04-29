@@ -1,7 +1,6 @@
 var React = require('react');
-var jsnox = require('jsnox');
 
-var d = jsnox(React);
+var h = React.createElement;
 
 function TreeNode (props) {
   var spanProps = {
@@ -12,7 +11,7 @@ function TreeNode (props) {
   if (props.current) {
     spanProps.className = 'current';
   }
-  return d('span', spanProps, props.text);
+  return h('span', spanProps, props.text);
 }
 
 TreeNode.propTypes = {

@@ -46,7 +46,6 @@
   },
   "dependencies": {
     "camelcase": "^2.1.1",
-    "jsnox": "^2.1.2",
     "purecss": "^0.6.0",
     "ramda": "^0.21.0",
     "react": "^15.0.1",

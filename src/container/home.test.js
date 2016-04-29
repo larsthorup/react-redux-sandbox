@@ -1,19 +1,18 @@
 /* eslint-env mocha */
 
 var React = require('react');
-var jsnox = require('jsnox');
 var sinon = require('sinon');
 var sd = require('skin-deep');
 var Home = require('./home');
 
-var d = jsnox(React);
+var h = React.createElement;
 
 describe('Home', function () {
   describe('View', function () {
     it('should create a div with list of trees', function () {
       var setCurrent = sinon.spy();
       var model = {entities: [{entity: 'food', tree: {nodes: []}}, {entity: 'place', tree: {nodes: []}}], setCurrent: setCurrent, loadTree: function () {}};
-      var view = d(Home.View, model);
+      var view = h(Home.View, model);
       var dom = sd.shallowRender(view);
       dom.text().should.equal('food<Tree />place<Tree />'); // Note: debugging demo
       var trees = dom.everySubTree('Tree');
@@ -27,7 +26,7 @@ describe('Home', function () {
     it('should create buttons for missing trees', function () {
       var fetchingState = sinon.spy();
       var model = {entities: [{entity: 'food', tree: {nodes: []}}], setCurrent: function () {}, fetchingState: fetchingState};
-      var view = d(Home.View, model);
+      var view = h(Home.View, model);
       var dom = sd.shallowRender(view);
       var trees = dom.everySubTree('Tree');
       trees.length.should.equal(1);

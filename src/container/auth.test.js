@@ -1,19 +1,18 @@
 /* eslint-env mocha */
 
 var React = require('react');
-var jsnox = require('jsnox');
 var sinon = require('sinon');
 var sd = require('skin-deep');
 var Auth = require('./auth');
 
-var d = jsnox(React);
+var h = React.createElement;
 
 describe('container/auth', function () {
   describe('view', function () {
     it('should create buttons for missing trees', function () {
       var authAuthenticating = sinon.spy();
       var model = {authAuthenticating: authAuthenticating};
-      var view = d(Auth.View, model);
+      var view = h(Auth.View, model);
       var dom = sd.shallowRender(view);
       var buttons = dom.everySubTree('button');
       buttons.length.should.equal(1);
