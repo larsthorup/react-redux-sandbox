@@ -5,6 +5,9 @@ var ReactRouter = require('react-router');
 var Redux = require('redux');
 var thunk = require('redux-thunk').default;
 var ReactRedux = require('react-redux');
+
+require('./app.css');
+
 var S = require('./state/state');
 var A = require('./state/action');
 var reducer = require('./state/reducer');
