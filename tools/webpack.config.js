@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var pureCss = require('purecss/package.json');
 
 module.exports = {
   entry: {
@@ -13,7 +14,10 @@ module.exports = {
   plugins: [
     new webpack.IgnorePlugin(/ReactContext|react\/addons/),
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/index.html',
+      deps: {
+        pureCss
+      }
     })
   ]
 };
