@@ -29,5 +29,8 @@ module.exports = {
         pureCss
       }
     })
-  ]
+  ],
+  devServer: {
+    contentBase: './output/build'
+  }
 };
