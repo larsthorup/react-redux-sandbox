@@ -1,14 +1,15 @@
+var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var pureCss = require('purecss/package.json');
 
 module.exports = {
-  entry: {
-    app: './src/react.main.js'
-  },
+  entry: [
+    './src/react.main.js'
+  ],
   output: {
-    path: './output/build',
+    path: path.join(__dirname, '../output/build'),
     filename: '[name]-[hash].js'
   },
   module: {
@@ -17,6 +18,7 @@ module.exports = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       }
+    // ToDo: JSON loader?
     ]
   },
   devtool: 'source-map',
@@ -29,8 +31,5 @@ module.exports = {
         pureCss
       }
     })
-  ],
-  devServer: {
-    contentBase: './output/build'
-  }
+  ]
 };
