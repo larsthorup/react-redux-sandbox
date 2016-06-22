@@ -1,3 +1,4 @@
 span.current {
-    background-color: lightgrey;
+  background-color: lightgrey;
+  transition: 0.5s;
 }
