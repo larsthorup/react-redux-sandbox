@@ -81,16 +81,29 @@ describe('Home', function () {
             entity: 'food',
             tree: {
               nodes: [
-                {current: true, id: 'vegetable', text: 'Vegetable', nodes: [
-                  {id: 'fruit', text: 'Fruit', nodes: [
-                    {id: 'apple', text: 'Apple'},
-                    {id: 'orange', text: 'Orange'}
-                  ]}]
+                {
+                  current: true,
+                  id: 'vegetable',
+                  text: 'Vegetable',
+                  nodes: [
+                    {
+                      id: 'fruit',
+                      text: 'Fruit',
+                      nodes: [
+                        {id: 'apple', text: 'Apple'},
+                        {id: 'orange', text: 'Orange'}
+                      ]
+                    }
+                  ]
                 },
-                {id: 'meat', text: 'Meat', nodes: [
-                  {id: 'beef', text: 'Beef'},
-                  {id: 'lamb', text: 'Lamb'}
-                ]}
+                {
+                  id: 'meat',
+                  text: 'Meat',
+                  nodes: [
+                    {id: 'beef', text: 'Beef'},
+                    {id: 'lamb', text: 'Lamb'}
+                  ]
+                }
               ]
             }
           },
@@ -98,11 +111,18 @@ describe('Home', function () {
             entity: 'place',
             tree: {
               nodes: [
-                {id: 'earth', text: 'Earth', nodes: [
-                  {id: 'europe', text: 'Europe'},
-                  {current: true, id: 'africa', text: 'Africa'}
-                ]},
-                {id: 'mars', text: 'Mars'}
+                {
+                  id: 'earth',
+                  text: 'Earth',
+                  nodes: [
+                    {id: 'europe', text: 'Europe'},
+                    {current: true, id: 'africa', text: 'Africa'}
+                  ]
+                },
+                {
+                  id: 'mars',
+                  text: 'Mars'
+                }
               ]
             }
           }
