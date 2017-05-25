@@ -7,4 +7,4 @@
 
     npm install
     npm test
-    open output/build/index.html
+    open output/build/index.html in Firefox
