@@ -1,17 +1,10 @@
 module.exports = {
   verbose: false,
-  instrumentation: {
-    excludes: [
-      'src/**/*.test.js'
-    ]
-  },
-  reporting: {
-    print: 'none',
-    dir: './output/coverage',
-    reports: [
-      'lcov',
-      'json',
-      'text-summary'
-    ]
-  }
+  'report-dir': './output/coverage',
+  reporter: [
+    'lcov',
+    'json',
+    'text-summary'
+  ],
+  'temp-dir': './output/coverage'
 };
