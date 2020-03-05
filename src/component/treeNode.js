@@ -1,4 +1,5 @@
 var React = require('react');
+var PropTypes = require('prop-types');
 
 var h = React.createElement;
 
@@ -15,8 +16,8 @@ function TreeNode (props) {
 }
 
 TreeNode.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  text: React.PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired
 };
 
 module.exports = TreeNode;

@@ -11,7 +11,7 @@ describe('Home', function () {
   describe('View', function () {
     it('should create a div with list of trees', function () {
       var setCurrent = sinon.spy();
-      var model = {entities: [{entity: 'food', tree: {nodes: []}}, {entity: 'place', tree: {nodes: []}}], setCurrent: setCurrent, loadTree: function () {}};
+      var model = { entities: [{ entity: 'food', tree: { nodes: [] } }, { entity: 'place', tree: { nodes: [] } }], setCurrent: setCurrent, loadTree: function () {} };
       var view = h(Home.View, model);
       var dom = sd.shallowRender(view);
       dom.text().should.equal('food<Tree />place<Tree />'); // Note: debugging demo
@@ -19,13 +19,13 @@ describe('Home', function () {
       trees.length.should.equal(2);
       trees[0].props.nodes.should.equal(model.entities[0].tree.nodes);
       trees[0].props.setCurrentNode('orange');
-      setCurrent.lastCall.args.should.deep.equal([{entity: 'food', id: 'orange'}]);
+      setCurrent.lastCall.args.should.deep.equal([{ entity: 'food', id: 'orange' }]);
       trees[1].props.nodes.should.equal(model.entities[1].tree.nodes);
     });
 
     it('should create buttons for missing trees', function () {
       var fetchingState = sinon.spy();
-      var model = {entities: [{entity: 'food', tree: {nodes: []}}], setCurrent: function () {}, fetchingState: fetchingState};
+      var model = { entities: [{ entity: 'food', tree: { nodes: [] } }], setCurrent: function () {}, fetchingState: fetchingState };
       var view = h(Home.View, model);
       var dom = sd.shallowRender(view);
       var trees = dom.everySubTree('Tree');
@@ -34,7 +34,7 @@ describe('Home', function () {
       var buttons = dom.everySubTree('button');
       buttons.length.should.equal(1);
       buttons[0].props.onClick();
-      fetchingState.lastCall.args.should.deep.equal([{name: 'place'}]);
+      fetchingState.lastCall.args.should.deep.equal([{ name: 'place' }]);
     });
   });
 
@@ -57,19 +57,19 @@ describe('Home', function () {
               }
             },
             food: {
-              'vegetable': {name: 'Vegetable', subtypes: ['fruit']},
-              'fruit': {name: 'Fruit', subtypes: ['apple', 'orange']},
-              'apple': {name: 'Apple', subtypes: []},
-              'orange': {name: 'Orange', subtypes: []},
-              'meat': {name: 'Meat', subtypes: ['beef', 'lamb']},
-              'beef': {name: 'Beef', subtypes: []},
-              'lamb': {name: 'Lamb', subtypes: []}
+              vegetable: { name: 'Vegetable', subtypes: ['fruit'] },
+              fruit: { name: 'Fruit', subtypes: ['apple', 'orange'] },
+              apple: { name: 'Apple', subtypes: [] },
+              orange: { name: 'Orange', subtypes: [] },
+              meat: { name: 'Meat', subtypes: ['beef', 'lamb'] },
+              beef: { name: 'Beef', subtypes: [] },
+              lamb: { name: 'Lamb', subtypes: [] }
             },
             place: {
-              'earth': {name: 'Earth', places: ['europe', 'africa']},
-              'europe': {name: 'Europe', places: []},
-              'africa': {name: 'Africa', places: []},
-              'mars': {name: 'Mars', places: []}
+              earth: { name: 'Earth', places: ['europe', 'africa'] },
+              europe: { name: 'Europe', places: [] },
+              africa: { name: 'Africa', places: [] },
+              mars: { name: 'Mars', places: [] }
             }
           }
         }
@@ -90,8 +90,8 @@ describe('Home', function () {
                       id: 'fruit',
                       text: 'Fruit',
                       nodes: [
-                        {id: 'apple', text: 'Apple'},
-                        {id: 'orange', text: 'Orange'}
+                        { id: 'apple', text: 'Apple' },
+                        { id: 'orange', text: 'Orange' }
                       ]
                     }
                   ]
@@ -100,8 +100,8 @@ describe('Home', function () {
                   id: 'meat',
                   text: 'Meat',
                   nodes: [
-                    {id: 'beef', text: 'Beef'},
-                    {id: 'lamb', text: 'Lamb'}
+                    { id: 'beef', text: 'Beef' },
+                    { id: 'lamb', text: 'Lamb' }
                   ]
                 }
               ]
@@ -115,8 +115,8 @@ describe('Home', function () {
                   id: 'earth',
                   text: 'Earth',
                   nodes: [
-                    {id: 'europe', text: 'Europe'},
-                    {current: true, id: 'africa', text: 'Africa'}
+                    { id: 'europe', text: 'Europe' },
+                    { current: true, id: 'africa', text: 'Africa' }
                   ]
                 },
                 {

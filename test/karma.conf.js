@@ -2,13 +2,13 @@ module.exports = function (config) {
   config.set({
     basePath: '..',
 
-    browsers: [ 'Chrome' ],
+    browsers: ['Chrome'],
 
     files: [
       'output/test/karma-webpack.js'
     ],
 
-    frameworks: [ 'mocha' ],
+    frameworks: ['mocha'],
 
     plugins: [
       'karma-chrome-launcher',
@@ -16,6 +16,6 @@ module.exports = function (config) {
       'karma-mocha'
     ],
 
-    reporters: [ 'dots' ]
+    reporters: ['dots']
   });
 };

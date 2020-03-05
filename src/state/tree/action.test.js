@@ -7,7 +7,7 @@ var A = require('./action');
 describe('tree/action', function () {
   describe('fetchingState', function () {
     beforeEach(function () {
-      fetchMock.mock('data/food.json', {valid: 'json'});
+      fetchMock.mock('data/food.json', { valid: 'json' });
     });
 
     afterEach(function () {
@@ -16,9 +16,9 @@ describe('tree/action', function () {
 
     it('should dispatch requestState and receiveState events', function () {
       var dispatch = sinon.spy();
-      return A.fetchingState({name: 'food'})(dispatch).then(function () {
-        dispatch.getCall(0).args.should.deep.equal([{type: 'REQUEST_STATE', payload: {name: 'food'}}]);
-        dispatch.getCall(1).args.should.deep.equal([{type: 'RECEIVE_STATE', payload: {name: 'food', json: {valid: 'json'}}}]);
+      return A.fetchingState({ name: 'food' })(dispatch).then(function () {
+        dispatch.getCall(0).args.should.deep.equal([{ type: 'REQUEST_STATE', payload: { name: 'food' } }]);
+        dispatch.getCall(1).args.should.deep.equal([{ type: 'RECEIVE_STATE', payload: { name: 'food', json: { valid: 'json' } } }]);
         dispatch.callCount.should.equal(2);
       });
     });

@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var pureCss = require('purecss/package.json');
 
@@ -10,21 +10,27 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '../output/build'),
-    filename: '[name]-[hash].js'
+    chunkFilename: '[name]-[chunkhash].js',
+    filename: '[name]-[chunkhash].js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        use: [
+          'css-loader'
+        ]
       }
-    // ToDo: JSON loader?
     ]
   },
+  mode: process.env.NODE_ENV ? 'production' : 'development',
   devtool: 'source-map',
   plugins: [
     new webpack.IgnorePlugin(/ReactContext|react\/addons/),
-    new ExtractTextPlugin('app-[hash].css'),
+    new MiniCssExtractPlugin({
+      filename: 'app-[contenthash].css',
+      chunkFilename: '[id].css'
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       deps: {

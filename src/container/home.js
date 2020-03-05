@@ -7,26 +7,26 @@ var h = React.createElement;
 var connect = ReactRedux.connect;
 
 function makeTreeProps (treeProps, entity, homeProps) {
-  var key = {key: entity};
-  var setCurrentNode = {setCurrentNode: function (id) { homeProps.setCurrent({entity: entity, id: id}); }};
+  var key = { key: entity };
+  var setCurrentNode = { setCurrentNode: function (id) { homeProps.setCurrent({ entity: entity, id: id }); } };
   return Object.assign({}, key, setCurrentNode, treeProps);
 }
 
 function makeButton (homeProps, entity) {
-  var onClick = function () { homeProps.fetchingState({name: entity}); }; // Note: async action requires redux-thunk middleware
-  return [h('button', {key: entity + 'Button', onClick: onClick}, entity)];
+  var onClick = function () { homeProps.fetchingState({ name: entity }); }; // Note: async action requires redux-thunk middleware
+  return [h('button', { key: entity + 'Button', onClick: onClick }, entity)];
 }
 
 function Home (props) {
   var elems = [];
-  var buttons = {'food': true, 'place': true};
+  var buttons = { food: true, place: true };
   // ToDo: non-procedural code
   for (var i = 0; i < props.entities.length; ++i) {
     var entityProps = props.entities[i];
     var entity = entityProps.entity;
     delete buttons[entity];
     elems = elems.concat([
-      h('p', {key: entity + 'Header'}, entity),
+      h('p', { key: entity + 'Header' }, entity),
       h(Tree, makeTreeProps(entityProps.tree, entity, props))
     ]);
   }
@@ -44,14 +44,14 @@ Home.propTypes = {
 function mapStateToTreeNodeListProps (options) {
   var treeNodeListProps = options.nodeIds.map(function (nodeId) {
     var node = options.state.entities[options.entity][nodeId];
-    var id = {id: nodeId};
+    var id = { id: nodeId };
     var nodeIds = node[options.childProp];
     var nodes = nodeIds && nodeIds.length > 0 ? {
       nodes: mapStateToTreeNodeListProps(Object.assign({}, options, {
         nodeIds: nodeIds
       }))
     } : {};
-    var current = nodeId === options.state.entities.tree[options.entity].current ? {current: true} : {};
+    var current = nodeId === options.state.entities.tree[options.entity].current ? { current: true } : {};
     return Object.assign(id, nodes, current, options.mapNode(node));
   });
   return treeNodeListProps;
@@ -62,17 +62,17 @@ function mapStateToTreeProps (options) {
   var treeProps = {
     nodes: mapStateToTreeNodeListProps(options)
   };
-  return {entity: options.entity, tree: treeProps};
+  return { entity: options.entity, tree: treeProps };
 }
 
 var childProp = {
-  'food': 'subtypes',
-  'place': 'places'
+  food: 'subtypes',
+  place: 'places'
 };
 
 var mapNode = {
-  'food': function (food) { return {text: food.name}; },
-  'place': function (place) { return {text: place.name}; }
+  food: function (food) { return { text: food.name }; },
+  place: function (place) { return { text: place.name }; }
 };
 
 function mapStateToProps (state) {

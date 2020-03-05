@@ -7,7 +7,7 @@ var reducer = require('./reducer');
 
 describe('auth/reducer', function () {
   beforeEach(function () {
-    this.sinon = sinon.sandbox.create();
+    this.sinon = sinon.createSandbox();
     this.historyOld = route.history;
     route.history = {
       push: sinon.spy()

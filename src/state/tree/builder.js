@@ -31,7 +31,7 @@ function flatten (parentArgs, builders) {
     var args = R.append(entity, parentArgs);
     return R.map(function (keyBuilders) {
       if (typeof keyBuilders === 'function') {
-        return {args: args, actionCreator: keyBuilders};
+        return { args: args, actionCreator: keyBuilders };
       } else {
         return flatten(args, keyBuilders);
       }
@@ -53,10 +53,10 @@ function build (builders, state) {
 
 var B = {
   build: build,
-  setCurrent: R.curry(function (entity, id) { return A.setCurrent({entity: entity, id: id}); }),
-  addTree: R.curry(function (entity) { return A.addTree({entity: entity}); }),
-  addTreeNode: R.curry(function (entity, id) { return A.addTreeNode({entity: entity, id: id}); }),
-  renameTreeNode: R.curry(function (entity, id, name) { return A.renameTreeNode({entity: entity, id: id, name: name}); })
+  setCurrent: R.curry(function (entity, id) { return A.setCurrent({ entity: entity, id: id }); }),
+  addTree: R.curry(function (entity) { return A.addTree({ entity: entity }); }),
+  addTreeNode: R.curry(function (entity, id) { return A.addTreeNode({ entity: entity, id: id }); }),
+  renameTreeNode: R.curry(function (entity, id, name) { return A.renameTreeNode({ entity: entity, id: id, name: name }); })
 };
 
 module.exports = B;

@@ -7,7 +7,7 @@ var connect = ReactRedux.connect;
 
 function Auth (props) {
   return h('div', null, [
-    h('button', {key: 'loginButton', onClick: function () { props.authAuthenticating({credential: {userName: 'lars'}}); }}, 'Login')
+    h('button', { key: 'loginButton', onClick: function () { props.authAuthenticating({ credential: { userName: 'lars' } }); } }, 'Login')
   ]);
 }
 

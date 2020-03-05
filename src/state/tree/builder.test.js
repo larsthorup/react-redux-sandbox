@@ -13,27 +13,27 @@ describe('build', function () {
 
   describe('entity', function () {
     it('should reduce the actions against the entity', function () {
-      var state = B.build({'food': [B.addTree]});
+      var state = B.build({ food: [B.addTree] });
       state.should.deep.equal({
         entities: {
           tree: {
-            'food': {}
+            food: {}
           },
-          'food': {}
+          food: {}
         }
       });
     });
 
     describe('key', function () {
       it('should reduce the actions against the entity and key', function () {
-        var state = B.build({'food': [B.addTree, {'apple': [B.addTreeNode, {'Apple': [B.renameTreeNode]}, B.setCurrent]}]});
+        var state = B.build({ food: [B.addTree, { apple: [B.addTreeNode, { Apple: [B.renameTreeNode] }, B.setCurrent] }] });
         state.should.deep.equal({
           entities: {
             tree: {
-              'food': {current: 'apple'}
+              food: { current: 'apple' }
             },
-            'food': {
-              'apple': {name: 'Apple', subtypes: []}
+            food: {
+              apple: { name: 'Apple', subtypes: [] }
             }
           }
         });

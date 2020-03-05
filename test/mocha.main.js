@@ -1,7 +1,7 @@
 'use strict';
 
 // Chai setup
-let chai = require('chai');
+const chai = require('chai');
 chai.should();
 
 // ToDo: use sinon-chai when it has been upgraded to work with sinon@2
